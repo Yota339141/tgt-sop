@@ -707,7 +707,7 @@
           <button onclick="clearSparkAccounts()" style="background:#eee;color:var(--mid);border:none;border-radius:4px;padding:5px 14px;font-size:12px;cursor:pointer;">清除</button>
         </div>
       </div>
-      <div style="font-size:11px;color:var(--muted);margin-bottom:8px;">⚠️ 資料儲存在此瀏覽器本機（localStorage），換電腦或換瀏覽器需重新填寫。</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:8px;">⚠️ 資料儲存於 Supabase，所有人共用同一份資料。</div>
       <table id="spark-table" style="width:100%;border-collapse:collapse;font-size:13px;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,0.07);border-radius:6px;overflow:hidden;">
         <thead>
           <tr style="background:var(--label-bg);color:#fff;">
@@ -1843,36 +1843,66 @@
   }
 
   // ── SPARK ACCOUNTS ──
-  function saveSparkAccounts() {
-    const data = {};
-    document.querySelectorAll('.spark-input').forEach(el => {
-      const row = el.dataset.row;
-      const col = el.dataset.col;
-      if (!data[row]) data[row] = {};
-      data[row][col] = el.value;
-    });
-    localStorage.setItem('tgt_spark_accounts', JSON.stringify(data));
+  // ── SUPABASE CONFIG ──
+  const SB_URL = 'https://netevdsebnvfwtygyedl.supabase.co';
+  const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ldGV2ZHNlYm52Znd0eWd5ZWRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMTY3NDMsImV4cCI6MjA5NDc5Mjc0M30.ti92m-v-tTNSIxQNZ_ixwpKUVbigKcgsx9masn6HSHw';
+  const SB_HEADERS = { 'Content-Type': 'application/json', 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY };
+
+  async function saveSparkAccounts() {
     const msg = document.getElementById('spark-save-msg');
-    msg.style.display = 'inline';
-    setTimeout(() => msg.style.display = 'none', 2000);
+    msg.textContent = '儲存中...'; msg.style.display = 'inline'; msg.style.color = '#888';
+
+    // Collect all rows
+    const rows = {};
+    document.querySelectorAll('.spark-input').forEach(el => {
+      const row = el.dataset.row; const col = el.dataset.col;
+      if (!rows[row]) rows[row] = { row_order: parseInt(row) };
+      rows[row][col] = el.value;
+    });
+
+    // Upsert all rows
+    const payload = Object.values(rows);
+    try {
+      const res = await fetch(`${SB_URL}/rest/v1/spark_accounts?on_conflict=row_order`, {
+        method: 'POST',
+        headers: { ...SB_HEADERS, 'Prefer': 'resolution=merge-duplicates' },
+        body: JSON.stringify(payload)
+      });
+      if (res.ok || res.status === 201) {
+        msg.textContent = '✓ 已儲存'; msg.style.color = 'green';
+      } else {
+        msg.textContent = '❌ 儲存失敗'; msg.style.color = 'red';
+      }
+    } catch(e) {
+      msg.textContent = '❌ 網路錯誤'; msg.style.color = 'red';
+    }
+    setTimeout(() => { msg.style.display = 'none'; msg.textContent = '✓ 已儲存'; }, 2500);
   }
 
-  function loadSparkAccounts() {
+  async function loadSparkAccounts() {
     try {
-      const data = JSON.parse(localStorage.getItem('tgt_spark_accounts') || '{}');
-      Object.entries(data).forEach(([row, cols]) => {
-        Object.entries(cols).forEach(([col, val]) => {
-          const el = document.querySelector(`.spark-input[data-row="${row}"][data-col="${col}"]`);
-          if (el) el.value = val;
+      const res = await fetch(`${SB_URL}/rest/v1/spark_accounts?select=*&order=row_order.asc`, {
+        headers: SB_HEADERS
+      });
+      if (!res.ok) return;
+      const data = await res.json();
+      data.forEach(row => {
+        ['name','account','pw','note'].forEach(col => {
+          const el = document.querySelector(`.spark-input[data-row="${row.row_order}"][data-col="${col}"]`);
+          if (el && row[col]) el.value = row[col];
         });
       });
     } catch(e) {}
   }
 
-  function clearSparkAccounts() {
+  async function clearSparkAccounts() {
     if (!confirm('確定清除所有 SPARK 帳號密碼資料？')) return;
-    localStorage.removeItem('tgt_spark_accounts');
-    document.querySelectorAll('.spark-input').forEach(el => el.value = '');
+    try {
+      await fetch(`${SB_URL}/rest/v1/spark_accounts?row_order=gte.0`, {
+        method: 'DELETE', headers: SB_HEADERS
+      });
+      document.querySelectorAll('.spark-input').forEach(el => el.value = '');
+    } catch(e) { alert('清除失敗'); }
   }
 
   function togglePw(checkbox) {
