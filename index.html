@@ -1853,27 +1853,41 @@
     msg.textContent = '儲存中...'; msg.style.display = 'inline'; msg.style.color = '#888';
 
     // Collect all rows
+    const payload = [];
     const rows = {};
     document.querySelectorAll('.spark-input').forEach(el => {
       const row = el.dataset.row; const col = el.dataset.col;
       if (!rows[row]) rows[row] = { row_order: parseInt(row) };
       rows[row][col] = el.value;
     });
+    Object.values(rows).forEach(r => payload.push(r));
 
-    // Upsert all rows
-    const payload = Object.values(rows);
     try {
-      const res = await fetch(`${SB_URL}/rest/v1/spark_accounts?on_conflict=row_order`, {
+      // Step 1: Delete all
+      await fetch(`${SB_URL}/rest/v1/spark_accounts?id=gte.0`, {
+        method: 'DELETE', headers: SB_HEADERS
+      });
+      // Also delete rows without id filter (handle empty table)
+      await fetch(`${SB_URL}/rest/v1/spark_accounts?row_order=gte.0`, {
+        method: 'DELETE', headers: SB_HEADERS
+      });
+
+      // Step 2: Insert all
+      const res = await fetch(`${SB_URL}/rest/v1/spark_accounts`, {
         method: 'POST',
-        headers: { ...SB_HEADERS, 'Prefer': 'resolution=merge-duplicates' },
+        headers: { ...SB_HEADERS, 'Prefer': 'return=minimal' },
         body: JSON.stringify(payload)
       });
+
       if (res.ok || res.status === 201) {
         msg.textContent = '✓ 已儲存'; msg.style.color = 'green';
       } else {
+        const err = await res.text();
+        console.error(err);
         msg.textContent = '❌ 儲存失敗'; msg.style.color = 'red';
       }
     } catch(e) {
+      console.error(e);
       msg.textContent = '❌ 網路錯誤'; msg.style.color = 'red';
     }
     setTimeout(() => { msg.style.display = 'none'; msg.textContent = '✓ 已儲存'; }, 2500);
