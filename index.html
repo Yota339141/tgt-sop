@@ -500,6 +500,97 @@
   .suggest-item:hover { background: #f0f4ff; }
   .suggest-item:last-child { border-bottom: none; }
 
+  /* ── SPECIAL RECORDS ── */
+  .rec-form {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  }
+  .rec-form h3 { font-size:14px; font-weight:700; color:var(--dark); margin-bottom:14px; }
+  .rec-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .rec-field label { font-size:11px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px; }
+  .rec-field input, .rec-field select, .rec-field textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size:13px;
+    font-family: inherit;
+    color: var(--dark);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .rec-field input:focus, .rec-field select:focus, .rec-field textarea:focus { border-color: var(--red); }
+  .rec-field textarea { resize: vertical; min-height: 70px; }
+  .rec-img-area {
+    border: 2px dashed var(--border);
+    border-radius: 6px;
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 12px;
+    transition: border-color 0.15s;
+    min-height: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    position: relative;
+  }
+  .rec-img-area:hover, .rec-img-area.dragover { border-color: var(--red); background: #fff5f5; }
+  .rec-img-area img { max-height: 160px; max-width: 100%; border-radius: 4px; object-fit: contain; }
+  .rec-img-area .clear-img {
+    position: absolute; top:6px; right:8px;
+    background: var(--red); color:#fff;
+    border: none; border-radius: 3px;
+    font-size:10px; padding:2px 7px; cursor:pointer;
+  }
+
+  .rec-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: start;
+  }
+  .rec-card-meta { font-size:11px; color:var(--muted); margin-bottom:6px; }
+  .rec-card-type {
+    display: inline-block;
+    font-size:10px; font-weight:700;
+    padding: 2px 8px; border-radius: 3px;
+    margin-right: 6px;
+  }
+  .rec-card-type.type-compare { background:#e8f0fe; color:#2255AA; }
+  .rec-card-type.type-issue { background:#fff0f0; color:var(--red); }
+  .rec-card-type.type-special { background:#f3e8ff; color:#5a3e8a; }
+  .rec-card-pid { font-weight:700; font-size:13px; color:var(--dark); }
+  .rec-card-note { font-size:12px; color:var(--mid); margin-top:4px; line-height:1.5; }
+  .rec-card-img img { max-width:160px; max-height:120px; border-radius:5px; cursor:zoom-in; object-fit:contain; border:1px solid var(--border); }
+  .rec-card-del { background:none; border:1px solid #ddd; border-radius:4px; font-size:11px; color:var(--muted); padding:3px 8px; cursor:pointer; }
+  .rec-card-del:hover { border-color:var(--red); color:var(--red); }
+
+  .rec-filter { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px; align-items:center; }
+  .rec-filter select, .rec-filter input {
+    border:1px solid var(--border); border-radius:4px; padding:5px 10px; font-size:12px; color:var(--dark); background:var(--white);
+  }
+  .rec-count { font-size:12px; color:var(--muted); }
+
   /* ── STD BLOCK ── */
   .std-block {
     border-bottom: 1px solid var(--border);
@@ -596,6 +687,14 @@
     <a class="nav-item" onclick="showSection('std')">
       <span class="nav-num" style="background:#2255AA;font-size:9px;">STD</span>
       <span>TGT Standard 查詢</span>
+    </a>
+    <a class="nav-item" onclick="showSection('rec')">
+      <span class="nav-num" style="background:#5a1a8a;font-size:9px;">REC</span>
+      <span>特殊外觀紀錄</span>
+    </a>
+    <a class="nav-item" onclick="showSection('rec')">
+      <span class="nav-num" style="background:#5a3e8a;font-size:9px;">REC</span>
+      <span>特殊外觀紀錄</span>
     </a>
   </div>
 </nav>
@@ -1366,6 +1465,76 @@
       </tr>
     </table>
   </div>
+  <!-- REC: 特殊外觀紀錄 -->
+  <div class="section" id="section-rec">
+    <div class="breadcrumb">TGT 3D 作業 SOP › <span>特殊外觀紀錄</span></div>
+    <div class="sec-header" style="background:#5a3e8a;">
+      <h2>特殊外觀紀錄</h2>
+      <span class="sec-tag" style="background:rgba(0,0,0,0.25);">樣品比較 ／ 外觀問題 ／ 黑特版</span>
+    </div>
+
+    <!-- 新增表單 -->
+    <div class="rec-form" style="margin-top:20px;">
+      <h3>＋ 新增紀錄</h3>
+      <div class="rec-grid">
+        <div class="rec-field">
+          <label>紀錄類型</label>
+          <select id="rec-type">
+            <option value="">— 選擇 —</option>
+            <option value="compare">樣品比較（3D vs 實體）</option>
+            <option value="issue">外觀問題紀錄</option>
+            <option value="special">黑特版 / 特殊外觀</option>
+          </select>
+        </div>
+        <div class="rec-field">
+          <label>PID</label>
+          <input id="rec-pid" type="text" placeholder="例：PID3GR099">
+        </div>
+        <div class="rec-field">
+          <label>季節</label>
+          <input id="rec-season" type="text" placeholder="例：C127">
+        </div>
+        <div class="rec-field">
+          <label>負責人</label>
+          <input id="rec-assignee" type="text" placeholder="例：Yota">
+        </div>
+        <div class="rec-field">
+          <label>日期</label>
+          <input id="rec-date" type="date">
+        </div>
+      </div>
+      <div class="rec-field" style="margin-bottom:12px;">
+        <label>備註說明</label>
+        <textarea id="rec-note" placeholder="說明外觀問題、特殊處理方式、與實體樣的差異等..."></textarea>
+      </div>
+      <div class="rec-field" style="margin-bottom:14px;">
+        <label>圖片（可貼上 Ctrl+V、拖放或點擊上傳）</label>
+        <div class="rec-img-area" id="rec-drop-area" onclick="document.getElementById('rec-file-input').click()" ondragover="recDragOver(event)" ondragleave="recDragLeave(event)" ondrop="recDrop(event)">
+          <input type="file" id="rec-file-input" accept="image/*" style="display:none" onchange="recFileSelected(this)">
+          <div id="rec-img-preview"><span style="font-size:22px;">🖼️</span><br>點擊、拖放或 Ctrl+V 貼上圖片</div>
+        </div>
+      </div>
+      <button onclick="saveRecord()" style="background:var(--red);color:#fff;border:none;border-radius:5px;padding:8px 20px;font-size:13px;font-weight:700;cursor:pointer;">💾 儲存紀錄</button>
+      <span id="rec-save-msg" style="font-size:12px;color:green;margin-left:10px;display:none;">✓ 已儲存</span>
+    </div>
+
+    <!-- 篩選 -->
+    <div class="rec-filter">
+      <select id="filter-type" onchange="loadRecords()">
+        <option value="">全部類型</option>
+        <option value="compare">樣品比較</option>
+        <option value="issue">外觀問題</option>
+        <option value="special">黑特版 / 特殊</option>
+      </select>
+      <input type="text" id="filter-pid" placeholder="搜尋 PID..." oninput="loadRecords()" style="width:160px;">
+      <input type="text" id="filter-season" placeholder="搜尋季節..." oninput="loadRecords()" style="width:120px;">
+      <span class="rec-count" id="rec-count"></span>
+    </div>
+
+    <!-- 紀錄列表 -->
+    <div id="rec-list"></div>
+  </div>
+
   <!-- STD: TGT STANDARD -->
   <div class="section" id="section-std">
     <div class="breadcrumb">TGT 3D 作業 SOP › <span>TGT Standard 查詢</span></div>
@@ -1634,10 +1803,195 @@
 
     </div><!-- end std-content -->
   </div>
+  <!-- REC: 特殊外觀紀錄 -->
+  <div class="section" id="section-rec">
+    <div class="breadcrumb">TGT 3D 作業 SOP › <span>特殊外觀紀錄</span></div>
+    <div class="sec-header" style="background:#5a1a8a;">
+      <h2>特殊外觀紀錄</h2>
+      <span class="sec-tag" style="background:rgba(0,0,0,0.25);">樣品比較 · 外觀問題 · 黑特版</span>
+    </div>
+
+    <!-- 新增表單 -->
+    <div style="background:#fff;padding:18px 22px;border-bottom:2px solid #5a1a8a;">
+      <div style="font-size:14px;font-weight:700;color:#5a1a8a;margin-bottom:14px;">＋ 新增紀錄</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;margin-bottom:12px;">
+        <div>
+          <div style="font-size:11px;font-weight:700;color:var(--mid);margin-bottom:4px;">紀錄類型</div>
+          <select id="rec-type" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:6px 8px;font-size:13px;">
+            <option value="">選擇類型</option>
+            <option value="樣品比較">樣品比較</option>
+            <option value="外觀問題">外觀問題</option>
+            <option value="黑特版">黑特版</option>
+            <option value="其他">其他</option>
+          </select>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;color:var(--mid);margin-bottom:4px;">PID</div>
+          <input id="rec-pid" type="text" placeholder="e.g. PID3GR099" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:6px 8px;font-size:13px;">
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;color:var(--mid);margin-bottom:4px;">季節</div>
+          <input id="rec-season" type="text" placeholder="e.g. C127" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:6px 8px;font-size:13px;">
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;color:var(--mid);margin-bottom:4px;">負責人</div>
+          <input id="rec-assignee" type="text" placeholder="姓名" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:6px 8px;font-size:13px;">
+        </div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <div style="font-size:11px;font-weight:700;color:var(--mid);margin-bottom:4px;">備註說明</div>
+        <textarea id="rec-note" placeholder="說明外觀問題、處理方式、客人要求等…" rows="3" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:8px;font-size:13px;resize:vertical;font-family:inherit;"></textarea>
+      </div>
+      <div style="margin-bottom:14px;">
+        <div style="font-size:11px;font-weight:700;color:var(--mid);margin-bottom:4px;">圖片（可直接貼上 Ctrl+V，或點擊選取）</div>
+        <div id="rec-img-drop" style="border:2px dashed #ccc;border-radius:6px;padding:16px;text-align:center;cursor:pointer;background:#fafafa;font-size:12px;color:#999;min-height:80px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;" onclick="document.getElementById('rec-img-file').click()">
+          <span style="font-size:24px;">🖼️</span>
+          <span>點擊選取圖片，或直接 Ctrl+V 貼上截圖</span>
+        </div>
+        <input id="rec-img-file" type="file" accept="image/*" style="display:none" onchange="handleRecImg(this.files[0])">
+        <div id="rec-img-preview" style="margin-top:8px;display:none;">
+          <img id="rec-img-thumb" style="max-height:160px;border-radius:6px;border:1px solid #ddd;" src="">
+          <button onclick="clearRecImg()" style="margin-left:8px;background:#eee;border:none;border-radius:4px;padding:4px 10px;font-size:12px;cursor:pointer;">✕ 移除</button>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <button onclick="saveRecord()" style="background:#5a1a8a;color:#fff;border:none;border-radius:4px;padding:8px 20px;font-size:13px;font-weight:700;cursor:pointer;">💾 儲存紀錄</button>
+        <button onclick="clearRecForm()" style="background:#eee;color:var(--mid);border:none;border-radius:4px;padding:8px 14px;font-size:13px;cursor:pointer;">清除</button>
+        <span id="rec-save-msg" style="font-size:12px;display:none;"></span>
+      </div>
+    </div>
+
+    <!-- 搜尋/篩選 -->
+    <div style="background:#f8f8f8;padding:12px 22px;border-bottom:1px solid var(--border);display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+      <input id="rec-search" type="text" placeholder="🔍 搜尋 PID、備註…" oninput="filterRecords()" style="border:1px solid #ddd;border-radius:4px;padding:6px 10px;font-size:13px;width:200px;">
+      <select id="rec-filter-type" onchange="filterRecords()" style="border:1px solid #ddd;border-radius:4px;padding:6px 8px;font-size:13px;">
+        <option value="">全部類型</option>
+        <option value="樣品比較">樣品比較</option>
+        <option value="外觀問題">外觀問題</option>
+        <option value="黑特版">黑特版</option>
+        <option value="其他">其他</option>
+      </select>
+      <span id="rec-count" style="font-size:12px;color:var(--muted);"></span>
+    </div>
+
+    <!-- 紀錄列表 -->
+    <div id="rec-list" style="padding:16px 22px;display:grid;gap:14px;"></div>
+    <div id="rec-empty" style="padding:40px;text-align:center;color:var(--muted);font-size:13px;display:none;">目前沒有紀錄</div>
+    <div id="rec-loading" style="padding:40px;text-align:center;color:var(--muted);font-size:13px;">載入中…</div>
+  </div>
 
 </main>
 
 <script>
+  // ── SPECIAL RECORDS ──
+  let recImageBase64 = '';
+  const REC_TYPE_LABEL = { compare:'樣品比較', issue:'外觀問題', special:'黑特版 / 特殊' };
+  const REC_TYPE_CLASS = { compare:'type-compare', issue:'type-issue', special:'type-special' };
+
+  function recDragOver(e) { e.preventDefault(); document.getElementById('rec-drop-area').classList.add('dragover'); }
+  function recDragLeave(e) { document.getElementById('rec-drop-area').classList.remove('dragover'); }
+  function recDrop(e) { e.preventDefault(); recDragLeave(e); if (e.dataTransfer.files[0]) recLoadImage(e.dataTransfer.files[0]); }
+  function recFileSelected(input) { if (input.files[0]) recLoadImage(input.files[0]); }
+
+  function recLoadImage(file) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      recImageBase64 = e.target.result;
+      const preview = document.getElementById('rec-img-preview');
+      preview.innerHTML = `<img src="${recImageBase64}" style="max-height:160px;max-width:100%;border-radius:4px;"><button class="clear-img" onclick="clearRecImage(event)">✕ 清除</button>`;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function clearRecImage(e) { e.stopPropagation(); recImageBase64 = ''; document.getElementById('rec-img-preview').innerHTML = '<span style="font-size:22px;">🖼️</span><br>點擊、拖放或 Ctrl+V 貼上圖片'; }
+
+  // Paste image support
+  document.addEventListener('paste', e => {
+    if (document.getElementById('section-rec').style.display === 'none') return;
+    const items = e.clipboardData?.items;
+    if (!items) return;
+    for (const item of items) {
+      if (item.type.startsWith('image/')) { recLoadImage(item.getAsFile()); break; }
+    }
+  });
+
+  async function saveRecord() {
+    const msg = document.getElementById('rec-save-msg');
+    msg.style.display = 'inline'; msg.textContent = '儲存中...'; msg.style.color = '#888';
+    const payload = {
+      record_type: document.getElementById('rec-type').value || null,
+      pid: document.getElementById('rec-pid').value || null,
+      season: document.getElementById('rec-season').value || null,
+      assignee: document.getElementById('rec-assignee').value || null,
+      record_date: document.getElementById('rec-date').value || null,
+      note: document.getElementById('rec-note').value || null,
+      image_base64: recImageBase64 || null,
+    };
+    try {
+      const res = await fetch(`${SB_URL}/rest/v1/special_records`, {
+        method: 'POST', headers: { ...SB_HEADERS, 'Prefer': 'return=minimal' }, body: JSON.stringify(payload)
+      });
+      if (res.ok || res.status === 201) {
+        msg.textContent = '✓ 已儲存'; msg.style.color = 'green';
+        // Clear form
+        ['rec-type','rec-pid','rec-season','rec-assignee','rec-date','rec-note'].forEach(id => document.getElementById(id).value = '');
+        clearRecImage({ stopPropagation: ()=>{} });
+        loadRecords();
+      } else { msg.textContent = '❌ 儲存失敗'; msg.style.color = 'red'; }
+    } catch(e) { msg.textContent = '❌ 網路錯誤'; msg.style.color = 'red'; }
+    setTimeout(() => { msg.style.display = 'none'; }, 2500);
+  }
+
+  async function loadRecords() {
+    const typeFilter = document.getElementById('filter-type')?.value;
+    const pidFilter = document.getElementById('filter-pid')?.value?.trim();
+    const seasonFilter = document.getElementById('filter-season')?.value?.trim();
+    let url = `${SB_URL}/rest/v1/special_records?select=*&order=created_at.desc`;
+    if (typeFilter) url += `&record_type=eq.${typeFilter}`;
+    if (pidFilter) url += `&pid=ilike.*${pidFilter}*`;
+    if (seasonFilter) url += `&season=ilike.*${seasonFilter}*`;
+    try {
+      const res = await fetch(url, { headers: SB_HEADERS });
+      if (!res.ok) return;
+      const data = await res.json();
+      const list = document.getElementById('rec-list');
+      const count = document.getElementById('rec-count');
+      if (count) count.textContent = `共 ${data.length} 筆`;
+      if (!data.length) { list.innerHTML = '<div style="color:var(--muted);font-size:13px;padding:20px 0;">尚無紀錄</div>'; return; }
+      list.innerHTML = data.map(r => `
+        <div class="rec-card">
+          <div>
+            <div class="rec-card-meta">
+              ${r.record_type ? `<span class="rec-card-type ${REC_TYPE_CLASS[r.record_type]||''}">${REC_TYPE_LABEL[r.record_type]||r.record_type}</span>` : ''}
+              ${r.season ? `<span style="font-size:11px;color:var(--muted);">${r.season}</span>` : ''}
+              ${r.record_date ? `<span style="font-size:11px;color:var(--muted);margin-left:8px;">${r.record_date}</span>` : ''}
+              ${r.assignee ? `<span style="font-size:11px;color:var(--muted);margin-left:8px;">👤 ${r.assignee}</span>` : ''}
+            </div>
+            <div class="rec-card-pid">${r.pid || '（無 PID）'}</div>
+            ${r.note ? `<div class="rec-card-note">${r.note.replace(/\n/g,'<br>')}</div>` : ''}
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+            ${r.image_base64 ? `<div class="rec-card-img"><img src="${r.image_base64}" onclick="openLightbox(this)" class="zoomable"></div>` : ''}
+            <button class="rec-card-del" onclick="deleteRecord(${r.id})">🗑 刪除</button>
+          </div>
+        </div>
+      `).join('');
+    } catch(e) {}
+  }
+
+  async function deleteRecord(id) {
+    if (!confirm('確定刪除這筆紀錄？')) return;
+    await fetch(`${SB_URL}/rest/v1/special_records?id=eq.${id}`, { method: 'DELETE', headers: SB_HEADERS });
+    loadRecords();
+  }
+
+  // Load records when navigating to rec section
+  const _origShowSection = showSection;
+  function showSection(id) {
+    _origShowSection(id);
+    if (id === 'rec') loadRecords();
+  }
+
   // ── LIGHTBOX ──
   function openLightbox(img) {
     document.getElementById('lightbox-img').src = img.src;
@@ -1673,9 +2027,10 @@
     const target = document.getElementById('section-' + id);
     if (target) { target.classList.add('active'); target.style.display = 'block'; }
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-    const map = { index:0, s1:1, s2:2, s3:3, s4:4, s5:5, s6:6, std:7 };
+    const map = { index:0, s1:1, s2:2, s3:3, s4:4, s5:5, s6:6, std:7, rec:8 };
     const navItems = document.querySelectorAll('.nav-item');
     if (map[id] !== undefined && navItems[map[id]]) navItems[map[id]].classList.add('active');
+    if (id === 'rec') loadRecords();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -1934,6 +2289,157 @@
       el.type = checkbox.checked ? 'text' : 'password';
     });
   }
+
+  // ── SPECIAL RECORDS ──
+  let recImgBase64 = '';
+  let allRecords = [];
+
+  function handleRecImg(file) {
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      recImgBase64 = e.target.result;
+      document.getElementById('rec-img-thumb').src = recImgBase64;
+      document.getElementById('rec-img-preview').style.display = 'block';
+      document.getElementById('rec-img-drop').style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function clearRecImg() {
+    recImgBase64 = '';
+    document.getElementById('rec-img-thumb').src = '';
+    document.getElementById('rec-img-preview').style.display = 'none';
+    document.getElementById('rec-img-drop').style.display = 'flex';
+    document.getElementById('rec-img-file').value = '';
+  }
+
+  function clearRecForm() {
+    ['rec-type','rec-pid','rec-season','rec-assignee'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el.tagName === 'SELECT') el.value = '';
+      else el.value = '';
+    });
+    document.getElementById('rec-note').value = '';
+    clearRecImg();
+    document.getElementById('rec-save-msg').style.display = 'none';
+  }
+
+  async function saveRecord() {
+    const msg = document.getElementById('rec-save-msg');
+    msg.textContent = '儲存中…'; msg.style.display = 'inline'; msg.style.color = '#888';
+
+    const payload = {
+      record_type: document.getElementById('rec-type').value || null,
+      pid: document.getElementById('rec-pid').value || null,
+      season: document.getElementById('rec-season').value || null,
+      assignee: document.getElementById('rec-assignee').value || null,
+      record_date: new Date().toLocaleDateString('zh-TW'),
+      note: document.getElementById('rec-note').value || null,
+      image_base64: recImgBase64 || null,
+    };
+
+    // Must have at least one field
+    if (!payload.record_type && !payload.pid && !payload.note && !payload.image_base64) {
+      msg.textContent = '⚠️ 請至少填寫一個欄位'; msg.style.color = '#cc8800';
+      return;
+    }
+
+    try {
+      const res = await fetch(`${SB_URL}/rest/v1/special_records`, {
+        method: 'POST',
+        headers: { ...SB_HEADERS, 'Prefer': 'return=minimal' },
+        body: JSON.stringify(payload)
+      });
+      if (res.ok || res.status === 201) {
+        msg.textContent = '✓ 已儲存'; msg.style.color = 'green';
+        clearRecForm();
+        await loadRecords();
+      } else {
+        msg.textContent = '❌ 儲存失敗'; msg.style.color = 'red';
+      }
+    } catch(e) {
+      msg.textContent = '❌ 網路錯誤'; msg.style.color = 'red';
+    }
+    setTimeout(() => msg.style.display = 'none', 2500);
+  }
+
+  async function deleteRecord(id) {
+    if (!confirm('確定刪除這筆紀錄？')) return;
+    await fetch(`${SB_URL}/rest/v1/special_records?id=eq.${id}`, {
+      method: 'DELETE', headers: SB_HEADERS
+    });
+    await loadRecords();
+  }
+
+  async function loadRecords() {
+    document.getElementById('rec-loading').style.display = 'block';
+    document.getElementById('rec-list').innerHTML = '';
+    try {
+      const res = await fetch(`${SB_URL}/rest/v1/special_records?select=*&order=created_at.desc`, {
+        headers: SB_HEADERS
+      });
+      allRecords = await res.json();
+      renderRecords(allRecords);
+    } catch(e) {
+      document.getElementById('rec-loading').textContent = '載入失敗';
+    }
+    document.getElementById('rec-loading').style.display = 'none';
+  }
+
+  function filterRecords() {
+    const q = document.getElementById('rec-search').value.toLowerCase();
+    const t = document.getElementById('rec-filter-type').value;
+    const filtered = allRecords.filter(r => {
+      const matchType = !t || r.record_type === t;
+      const matchQ = !q || [r.pid, r.note, r.assignee, r.season, r.record_type].some(v => v && v.toLowerCase().includes(q));
+      return matchType && matchQ;
+    });
+    renderRecords(filtered);
+  }
+
+  const TYPE_COLORS = { '樣品比較':'#2255AA', '外觀問題':'#CC0000', '黑特版':'#5a1a8a', '其他':'#555' };
+
+  function renderRecords(records) {
+    const list = document.getElementById('rec-list');
+    const empty = document.getElementById('rec-empty');
+    document.getElementById('rec-count').textContent = `共 ${records.length} 筆`;
+    if (!records.length) { list.innerHTML = ''; empty.style.display = 'block'; return; }
+    empty.style.display = 'none';
+    list.innerHTML = records.map(r => {
+      const color = TYPE_COLORS[r.record_type] || '#555';
+      const img = r.image_base64 ? `<img src="${r.image_base64}" style="max-height:180px;border-radius:6px;border:1px solid #ddd;cursor:zoom-in;margin-top:8px;" class="zoomable" onclick="openLightbox(this)">` : '';
+      return `<div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:16px 18px;box-shadow:0 1px 6px rgba(0,0,0,0.05);">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+          <div style="flex:1;">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
+              ${r.record_type ? `<span style="background:${color};color:#fff;font-size:11px;font-weight:700;padding:2px 9px;border-radius:3px;">${r.record_type}</span>` : ''}
+              ${r.pid ? `<span style="font-family:monospace;font-size:13px;font-weight:700;color:var(--dark);">${r.pid}</span>` : ''}
+              ${r.season ? `<span style="font-size:12px;color:var(--muted);">📅 ${r.season}</span>` : ''}
+              ${r.assignee ? `<span style="font-size:12px;color:var(--muted);">👤 ${r.assignee}</span>` : ''}
+              <span style="font-size:11px;color:#bbb;margin-left:auto;">${r.record_date || ''}</span>
+            </div>
+            ${r.note ? `<div style="font-size:13px;color:var(--dark);line-height:1.6;white-space:pre-wrap;">${r.note}</div>` : ''}
+            ${img}
+          </div>
+          <button onclick="deleteRecord(${r.id})" style="background:none;border:1px solid #ddd;border-radius:4px;padding:3px 8px;font-size:11px;color:#999;cursor:pointer;flex-shrink:0;" title="刪除">✕</button>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  // Paste image support
+  document.addEventListener('paste', e => {
+    const active = document.querySelector('.section.active');
+    if (!active || active.id !== 'section-rec') return;
+    const items = e.clipboardData.items;
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].type.startsWith('image/')) {
+        handleRecImg(items[i].getAsFile());
+        break;
+      }
+    }
+  });
 
   // ── INIT ──
   document.querySelectorAll('.section').forEach(s => {
