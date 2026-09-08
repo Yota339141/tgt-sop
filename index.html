@@ -692,10 +692,6 @@
       <span class="nav-num" style="background:#5a1a8a;font-size:9px;">REC</span>
       <span>特殊外觀紀錄</span>
     </a>
-    <a class="nav-item" onclick="showSection('rec')">
-      <span class="nav-num" style="background:#5a3e8a;font-size:9px;">REC</span>
-      <span>特殊外觀紀錄</span>
-    </a>
   </div>
 </nav>
 
@@ -2005,20 +2001,22 @@
     const msg = document.getElementById('rec-save-msg');
     msg.textContent = '儲存中…'; msg.style.display = 'inline'; msg.style.color = '#888';
 
-    const payload = {
-      record_type: document.getElementById('rec-type').value || null,
-      pid: document.getElementById('rec-pid').value || null,
-      season: document.getElementById('rec-season').value || null,
-      assignee: document.getElementById('rec-assignee').value || null,
-      record_date: new Date().toLocaleDateString('zh-TW'),
-      note: document.getElementById('rec-note').value || null,
-      image_base64: recImgBase64 || null,
+    const raw = {
+      record_type: document.getElementById('rec-type').value,
+      pid: document.getElementById('rec-pid').value,
+      season: document.getElementById('rec-season').value,
+      assignee: document.getElementById('rec-assignee').value,
+      record_date: document.getElementById('rec-date') ? document.getElementById('rec-date').value : new Date().toLocaleDateString('zh-TW'),
+      note: document.getElementById('rec-note').value,
+      image_base64: recImgBase64,
     };
 
-    // Must have at least one field
-    if (!payload.record_type && !payload.pid && !payload.note && !payload.image_base64) {
-      msg.textContent = '⚠️ 請至少填寫一個欄位'; msg.style.color = '#cc8800';
-      return;
+    // Remove empty fields
+    const payload = {};
+    Object.entries(raw).forEach(([k, v]) => { if (v && v.trim && v.trim()) payload[k] = v; else if (v && !v.trim) payload[k] = v; });
+
+    if (Object.keys(payload).length === 0) {
+      msg.textContent = '⚠️ 請至少填寫一個欄位'; msg.style.color = '#cc8800'; return;
     }
 
     try {
@@ -2032,12 +2030,15 @@
         clearRecForm();
         await loadRecords();
       } else {
-        msg.textContent = '❌ 儲存失敗'; msg.style.color = 'red';
+        const errText = await res.text();
+        console.error('Save error:', errText);
+        msg.textContent = '❌ 儲存失敗：' + (JSON.parse(errText).message || res.status); msg.style.color = 'red';
       }
     } catch(e) {
+      console.error(e);
       msg.textContent = '❌ 網路錯誤'; msg.style.color = 'red';
     }
-    setTimeout(() => msg.style.display = 'none', 2500);
+    setTimeout(() => msg.style.display = 'none', 4000);
   }
 
   async function deleteRecord(id) {
