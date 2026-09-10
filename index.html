@@ -1461,6 +1461,217 @@
       </tr>
     </table>
   </div>
+  <!-- STD: TGT STANDARD -->
+  <div class="section" id="section-std">
+    <div class="breadcrumb">TGT 3D 作業 SOP › <span>TGT Standard 查詢</span></div>
+    <div class="sec-header" style="background:#2255AA;">
+      <h2>TGT 3D Apparel Standards  V11 July 2026</h2>
+      <span class="sec-tag" style="background:rgba(0,0,0,0.25);">Minimum quality standards for 3D models</span>
+    </div>
+    <div style="background:#fff;padding:10px 18px;font-size:12px;color:var(--muted);border-bottom:1px solid var(--border);">
+      V11 July 2026 主要更新：新增 Pressure Map 說明、命名規則統一（ZPRJ/GLB/PNG）、XML/JSON 僅限 Proto 送審、Trims 須放 trim section、10×10 方塊從 2D pattern 移除。可用上方搜尋欄輸入關鍵字查找。
+    </div>
+    <div id="std-content">
+    <div class="std-block">
+      <div class="std-title">Mesh 網格標準</div>
+      <ul class="sop-list">
+        <li>最終送審 mesh 大小：<strong>CLO ≤ 5</strong>（細節處使用 Subdivide）／ <strong>Browzwear ≤ 0.4</strong></li>
+        <li>gathers / shirring / smocking / rouching 等細節需更小 mesh size</li>
+        <li>Final submission 使用 Triangles（三角形 mesh）</li>
+        <li>製作中可用較大 mesh 加速，送審前務必縮小</li>
+        <li>Mesh 不得被拉伸或受壓造成不必要的碰撞</li>
+      </ul>
+    </div>
+    <div class="std-block">
+      <div class="std-title">Avatar 人台標準</div>
+      <ul class="sop-list">
+        <li>所有送審樣品須穿在 <strong>Target Approved Alvanon Avatar（Regular Pose）</strong>，除非 Target 另行要求</li>
+        <li>有兩種主要類型：Basic（所有尺碼）、No Hands & Feet（Men's/Women's/Big Boy/Big Girl 只有 core size）</li>
+        <li>Human-Like Avatar：Women's 全尺碼 00–30，各有 9 種 Pose</li>
+        <li>Access：<a href="https://abp.alvanon.com" target="_blank" style="color:var(--blue)">https://abp.alvanon.com</a>（聯絡 Virtual.Development@target.com）</li>
+        <li>不同 Target team 對 Avatar 與 Pose 偏好不同，請與 TD 確認</li>
+        <li>Skin Offset：送審前改為 <strong>0</strong></li>
+      </ul>
+    </div>
+    <div class="std-block">
+      <div class="std-title">True to Life 3D 模型</div>
+      <ul class="sop-list">
+        <li>包含完整內外部結構：Topstitching / Hems / Labels / Feeder trims / Interlining / Collars & collar stands</li>
+        <li>功能性細節：拉鍊用 zipper function、鈕扣可開合（不用縫線代替）</li>
+        <li>Real World Size：所有資產以 inches 建立正確物理尺寸</li>
+        <li>Skin Offset 移除以確保正確懸垂</li>
+        <li>與相似款式或實體樣比較；無過去款可參考時去服裝店或網路找參考</li>
+        <li>BPFE/BPTD 需在送審前進行 pre-review</li>
+      </ul>
+    </div>
+    <div class="std-block">
+      <div class="std-title">Stabilized Models 模型穩定性</div>
+      <ul class="sop-list">
+        <li>模型需能保持形狀，re-simulation 後不走形、不鬆脫、不塌陷</li>
+        <li>所有縫合（包含 belt loops、drawcords 等）皆需實際縫好，不可依賴 pins 或 freeze 支撐</li>
+        <li>Pins 主要用於 styling 及 trim 細節（如蝴蝶結、抽繩）</li>
+        <li>布料物理屬性設定正確，不影響版型穩定性</li>
+        <li>Sewing tension 須符合縫型</li>
+      </ul>
+    </div>
+    <div class="std-block">
+      <div class="std-title">Best Practice 3D 結構</div>
+      <ul class="sop-list">
+        <li><strong>Turnback Hem</strong>：延伸版片邊緣做縫份並折疊</li>
+        <li><strong>Drawcord</strong>：平繩/義大利麵條形 → 只做露出部分；管狀繩 → 沿腰部隧道插入</li>
+        <li><strong>Binding</strong>：附上正確長度的直邊版片，使用 Binding tool</li>
+        <li><strong>Set-in Neckband / Cuffs / Placket / Welt Pocket / Bottom Band</strong>：用正確長度雙層折疊版片</li>
+        <li><strong>E-band WB/Cuff/Neck edge</strong>：含內層共三層，使用 relaxed spec，E-band grainline 需垂直</li>
+        <li><strong>Zipper</strong>：只有外露拉鍊可用 Zipper tool；其他需分開做拉鍊齒並加 trim</li>
+        <li><strong>Pocket Bag</strong>：層數與版片數須符合實物</li>
+        <li><strong>Collar & Collar Stand</strong>：需雙層</li>
+        <li><strong>Flatseam</strong>：位置須與實物一致；CB seam line 只是參考線，不應顯示</li>
+      </ul>
+    </div>
+    <div class="std-block">
+      <div class="std-title">Fit Maps 評估工具</div>
+      <ul class="sop-list">
+        <li><strong>Strain Map（CLO）/ Tension Map（BW）</strong>：測量布料拉伸量，100% = 未拉伸</li>
+        <li><strong>Pressure Map – CLO</strong>：測量身體對布料的壓力（kPa）<br>
+          &nbsp;&nbsp;• Comfortable：0–1.0 kPa<br>
+          &nbsp;&nbsp;• Tight but comfortable：1.0–2.0 kPa<br>
+          &nbsp;&nbsp;• Tight but wearable：2.0–3.0 kPa<br>
+          &nbsp;&nbsp;• <span style="color:var(--red);font-weight:700;">Very tight, Not wearable：&gt;3.0 kPa</span>
+        </li>
+        <li><strong>Pressure Map – BW</strong>：White = 無壓力，Red = 最高壓力；<span style="color:var(--red);font-weight:700;">&gt;30 gf/cm² 不可穿</span></li>
+        <li><strong>Translucent Surface（CLO）</strong>：查看布料與身體相對位置，非 Fit Map</li>
+        <li>CLO 注意：含 E-band 的款式用 <strong>CPU simulation</strong>；Skin Offset 設 0</li>
+      </ul>
+    </div>
+    <div class="std-block">
+      <div class="std-title">Grading 全碼製作</div>
+      <ul class="sop-list">
+        <li>2D 系統需能匯出 AAMA 或 ASTM/DXF .rul 格式</li>
+        <li>所有版片（含 3D artist 自製的 straps、feeder trims 等）都需有 grade rule</li>
+        <li>包含 10"×10" 方塊用以確認比例（XML/JSON <strong>上傳前刪除</strong>）</li>
+        <li>送審前由 BPFE/BPTD 確認 final sample</li>
+      </ul>
+    </div>
+    <div class="std-block">
+      <div class="std-title">GSA 送審要求</div>
+      <ul class="sop-list">
+        <li>ZPRJ：所有尺碼合成 <strong>1 個檔案</strong></li>
+        <li>單色（淺色或 Silver Springs）；Denim 另加 Denim Wash</li>
+        <li>Graded pattern：aama/dxf + rul</li>
+        <li>Excel measurement chart</li>
+        <li>PowerPoint evaluation：含符合標準的渲圖，每個尺碼並排</li>
+        <li>GSA Naming：<span style="font-family:monospace;color:var(--red)">PIDABC123_LowRiseBarrelJean_gsa_womens.zprj</span></li>
+      </ul>
+    </div>
+    <div class="std-block">
+      <div class="std-title">Digital Twin 送審要求</div>
+      <ul class="sop-list">
+        <li>Source File：Core size 穿到人台，含完整 graded pattern，<strong>所有顏色</strong></li>
+        <li>GLB：Core size 全顏色</li>
+        <li>不做 styling（袖子不折上、不加吊牌）</li>
+        <li>PNG：每個顏色正面+背面，Hollow body</li>
+        <li>直接上傳 Spark，不需要 PowerPoint eval</li>
+        <li>Source File Naming：<span style="font-family:monospace;color:var(--red)">PIDABC123_LowRiseBarrelJean_dt_womens.zprj</span></li>
+        <li>GLB Naming：<span style="font-family:monospace;color:var(--red)">PIDABC123_LowRiseBarrelJean_WowzerRed.glb</span></li>
+      </ul>
+    </div>
+    <div class="std-block">
+      <div class="std-title">命名規則 Naming Convention（V11）</div>
+      <ul class="sop-list">
+        <li>前三碼必須為大寫字母：<strong>PIDABC123_...</strong></li>
+        <li>只能用：字母、數字、底線（_）；不能使用空格、連字號（-）、Unicode</li>
+        <li>最大長度：<strong>55 字元</strong></li>
+        <li>款式及顏色首字母大寫（例：LowRiseBarrelJean、WowzerRed）；sizeRange 全小寫</li>
+        <li><strong>Proto ZPRJ：</strong><span style="font-family:monospace;color:var(--red)">PIDABC123_LowRiseBarrelJean_proto_r1.zprj</span></li>
+        <li><strong>GSA ZPRJ：</strong><span style="font-family:monospace;color:var(--red)">PIDABC123_LowRiseBarrelJean_gsa_womens.zprj</span></li>
+        <li><strong>DT ZPRJ：</strong><span style="font-family:monospace;color:var(--red)">PIDABC123_LowRiseBarrelJean_dt_womens.zprj</span></li>
+        <li><strong>GLB：</strong><span style="font-family:monospace;color:var(--red)">PIDABC123_LowRiseBarrelJean_WowzerRed.glb</span></li>
+        <li><strong>PNG：</strong><span style="font-family:monospace;color:var(--red)">PIDABC123_back_WowzerRed.PNG</span>（Camera：front / rightSide / back）</li>
+        <li><strong>Trim：</strong>必須以 TRM 開頭；格式：TRMXXXX_TrimCode_SZ1_trimType_color</li>
+        <li><strong>Fabric：</strong>以 FAS 或 FAB 編號開頭（例：FAS12345_fabricName）</li>
+      </ul>
+    </div>
+    <div class="std-block">
+      <div class="std-title">Proto 送審標準</div>
+      <ul class="sop-list">
+        <li>上傳顏色：<strong>Silver Springs</strong>（Archroma 色盤）；Denim 另加 Denim Wash</li>
+        <li>不加花版（Art），除非特別要求</li>
+        <li>每次送審 Comments 或 PPT 需包含：Sample Version / Artist name / Vendor Name</li>
+        <li>送審前 BPFE/BPTD 必須先進行 pre-review</li>
+        <li><strong>每輪送審需有</strong>：Source file / AAMA or DXF / Manually rendered PNG / GLB / XML or JSON（XML/JSON 僅限 Proto）</li>
+      </ul>
+    </div>
+    <div class="std-block">
+      <div class="std-title">3D File Requirements Checklist</div>
+      <ul class="sop-list">
+        <li>Pattern 不含縫份（seam allowance）與縮率（shrinkage）</li>
+        <li>所有版片以英文清楚標示</li>
+        <li>包含所有必要標記（darts / notches / button placements / pocket placement / grainline 等）</li>
+        <li><strong>Trims 放在 3D source file 的 trim section</strong></li>
+        <li>CLO：Fabric section 只放含 FAS 編號的布料</li>
+        <li>命名符合規範</li>
+      </ul>
+    </div>
+    <div class="std-block">
+      <div class="std-title">PNG Render 標準</div>
+      <ul class="sop-list">
+        <li>正面、側面、背面；不對稱款加右側</li>
+        <li>PNG 透明背景；300 DPI；使用 Crop（Final Render Only）選項</li>
+        <li>比例：3:4（上衣/長褲）／ 1:1（短裙/短褲）／ 1.25:3（長褲/長裙）</li>
+        <li>PNG Naming：<span style="font-family:monospace;color:var(--red)">PIDABC123_back_WowzerRed.PNG</span></li>
+        <li><strong>CLO 燈光</strong>：Light 4，Intensity 1.3，Angle 0，Lock to Camera On</li>
+        <li><strong>BW 燈光</strong>：TGT_Lighting01_BW_v01.hdr，V-Ray，CPU，Quality: Best，FOV: 12</li>
+      </ul>
+    </div>
+    <div class="std-block">
+      <div class="std-title">GLB Export 設定</div>
+      <ul class="sop-list">
+        <li>CLO：File Menu → Export → glTF 2.0 (GLB)</li>
+        <li>所有 Topstitching 改為 <strong>Texture</strong> 再匯出</li>
+        <li>Opacity map：不透明布料若有 Opacity map 需<strong>刪除</strong>，否則造成 z-fighting</li>
+        <li>BW：Render → Export as Binary (.glb)</li>
+      </ul>
+    </div>
+    <div class="std-block">
+      <div class="std-title">XML / JSON（V11：僅限 Proto 送審）</div>
+      <ul class="sop-list">
+        <li><strong>XML/JSON 僅限 Prototype 送審使用</strong></li>
+        <li>檔案不含 10×10 方塊；布料須指定給所有版片；版片以英文命名</li>
+        <li>Trims 放 trim section；CLO fabric section 只放含 FAS 的布料</li>
+        <li>只包含 base size 及一個 colorway</li>
+        <li>CLO：File → Export as BOM (XML)；XML 與 .zprj 需一起上傳</li>
+        <li>命名：<span style="font-family:monospace;color:var(--red)">PID_sizeRange_silhouette</span>（例：PID5GG6WE_men_topSs.xml）</li>
+        <li>sizeRange：_boy / _girl / _infantToddler / _men / _missy / _missyMaternity / _plus / _newborn</li>
+        <li>silhouette：_bodysuit / _topSt / _topSs / _topLs / _hoodie / _jacket / _short / _leggings / _pant / _skirt / _dress / _jumpsuit / _shirtsSs / _shirtsLs（褲裙用 Skirt）</li>
+      </ul>
+    </div>
+    <div class="std-block">
+      <div class="std-title">VM Instore Mannequin Dressing 標準</div>
+      <ul class="sop-list">
+        <li>Mannequin 從 Gallery 下載（搜尋：Scenes_Fixtures_Mannequins）</li>
+        <li>製作中粒子距離設 ≥5 加速模擬；送審前確認版型縫合正確</li>
+        <li>Skin Tone：從 Spark Virtual Instore Mannequin Library → Components 下載 ASE 檔</li>
+        <li>VM Standards 現已獨立為 Visual Merchandising 部門維護的文件</li>
+      </ul>
+    </div>
+    <div class="std-block">
+      <div class="std-title">名詞解釋 Glossary</div>
+      <ul class="sop-list">
+        <li><strong>GLB</strong>：gITF 的二進位格式，包含 cameras / materials / meshes 於單一檔案</li>
+        <li><strong>Mesh</strong>：由頂點、邊和面組成的集合，定義 3D 模型形狀</li>
+        <li><strong>Normal Map</strong>：不增加多邊形而模擬表面細節，用 RGB 值假造凹凸感</li>
+        <li><strong>Roughness</strong>：表面粗糙度，影響反光感；數值越高越霧面</li>
+        <li><strong>Source File</strong>：CLO (.zprj) / Browzwear (.bw) 的原始專案檔</li>
+        <li><strong>Strain Map</strong>：布料拉伸量，100% = 未拉伸（CLO 用）</li>
+        <li><strong>Pressure Map</strong>：身體對布料的壓力（kPa），&gt;3.0 kPa 不可穿（CLO 用）</li>
+        <li><strong>Translucent Surface</strong>：透視布料，查看鬆緊度（CLO 用，非 Fit Map）</li>
+        <li><strong>Digital Twin</strong>：已核可並紅章的款式所製作的 3D 模型，含正確材質</li>
+        <li><strong>聯絡</strong>：Digital.Material@target.com / Virtual.Development@target.com</li>
+      </ul>
+    </div>
+    </div><!-- end std-content -->
+  </div>
+
   <!-- REC: 特殊外觀紀錄 -->
   <div class="section" id="section-rec">
     <div class="breadcrumb">TGT 3D 作業 SOP › <span>特殊外觀紀錄</span></div>
