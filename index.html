@@ -660,7 +660,7 @@
       <span>總覽</span>
     </a>
     <a class="nav-item" onclick="showSection('avatar')">
-      <span class="nav-num" style="background:#0d7a5f;font-size:9px;">👤</span>
+      <span class="nav-num" style="font-size:9px;">👤</span>
       <span>人台</span>
     </a>
     <a class="nav-item" onclick="showSection('s1')">
@@ -913,210 +913,235 @@
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
         <span style="font-weight:700;font-size:16px;">Women</span>
       </div>
-      <div class="path-label">人台位置</div>
-      <div style="display:flex;gap:6px;margin-top:6px;">
-        <input class="mannequin-input" data-cat="women" data-field="path1_label" placeholder="標籤（如 Missy）" value="Missy" style="width:90px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;flex-shrink:0;">
-        <input class="mannequin-input" data-cat="women" data-field="path1" placeholder="路徑" value="\\192.168.1.220\3ddb\TARGET\AVATAR\FOR_FIT\Alvanon\Clo3D_Original+Basic_20191210T025819Z\Women\Missy" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        <button type="button" class="mannequin-copy" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+
+      <div style="font-size:12px;font-weight:700;color:var(--mid);">尺碼群組（含人台位置）</div>
+      <div id="groups-women" data-next-id="3">
+      <div class="size-group" data-cat="women" data-group="women-1" style="border:1px solid var(--border);border-radius:6px;padding:10px;margin-top:10px;">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+          <input class="group-name-input" value="全尺碼（Missy）" placeholder="群組名稱（如 全尺碼、Plus、Husky）" style="flex:1;font-weight:700;font-size:12px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;">
+          <button type="button" onclick="removeSizeGroup(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 8px;font-size:12px;cursor:pointer;color:#c0392b;">✕ 刪除群組</button>
+        </div>
+        <div style="display:flex;gap:6px;margin-bottom:8px;">
+          <input class="group-path-input" value="\\192.168.1.220\3ddb\TARGET\AVATAR\FOR_FIT\Alvanon\Clo3D_Original+Basic_20191210T025819Z\Women\Missy" placeholder="人台路徑" style="flex:1;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+          <button type="button" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:2px;">尺碼（點圓點設基碼）</div>
+        <div id="size-list-women-women-1">
+        <div class="size-row" data-cat="women" data-group="women-1" style="display:flex;align-items:center;gap:6px;margin-top:6px;padding:4px;">
+            <input type="radio" name="base-women-women-1" class="size-base-radio"  title="設為基碼" style="flex-shrink:0;">
+            <input class="size-input" data-field="size" value="XS" placeholder="尺碼" style="width:56px;flex-shrink:0;border:1px solid #ddd;border-radius:4px;padding:5px 6px;font-size:12px;">
+            <input class="size-input" data-field="code" value="TCE-WMS0002-2112" placeholder="版型代號" style="flex:1;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+            <button type="button" onclick="removeSizeRow(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 8px;font-size:12px;cursor:pointer;color:#c0392b;">✕</button>
+          </div>
+        <div class="size-row" data-cat="women" data-group="women-1" style="display:flex;align-items:center;gap:6px;margin-top:6px;padding:4px;">
+            <input type="radio" name="base-women-women-1" class="size-base-radio"  title="設為基碼" style="flex-shrink:0;">
+            <input class="size-input" data-field="size" value="S" placeholder="尺碼" style="width:56px;flex-shrink:0;border:1px solid #ddd;border-radius:4px;padding:5px 6px;font-size:12px;">
+            <input class="size-input" data-field="code" value="TCE-WMS0006-2112" placeholder="版型代號" style="flex:1;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+            <button type="button" onclick="removeSizeRow(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 8px;font-size:12px;cursor:pointer;color:#c0392b;">✕</button>
+          </div>
+        <div class="size-row" data-cat="women" data-group="women-1" style="display:flex;align-items:center;gap:6px;margin-top:6px;padding:4px;background:var(--bg-accent,#e8f0fe);border-radius:6px;">
+            <input type="radio" name="base-women-women-1" class="size-base-radio" checked title="設為基碼" style="flex-shrink:0;">
+            <input class="size-input" data-field="size" value="M" placeholder="尺碼" style="width:56px;flex-shrink:0;border:1px solid #ddd;border-radius:4px;padding:5px 6px;font-size:12px;">
+            <input class="size-input" data-field="code" value="TCE-WMS0010-2009" placeholder="版型代號" style="flex:1;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+            <button type="button" onclick="removeSizeRow(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 8px;font-size:12px;cursor:pointer;color:#c0392b;">✕</button>
+          </div>
+        <div class="size-row" data-cat="women" data-group="women-1" style="display:flex;align-items:center;gap:6px;margin-top:6px;padding:4px;">
+            <input type="radio" name="base-women-women-1" class="size-base-radio"  title="設為基碼" style="flex-shrink:0;">
+            <input class="size-input" data-field="size" value="L" placeholder="尺碼" style="width:56px;flex-shrink:0;border:1px solid #ddd;border-radius:4px;padding:5px 6px;font-size:12px;">
+            <input class="size-input" data-field="code" value="TCE-WMS0014-2112" placeholder="版型代號" style="flex:1;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+            <button type="button" onclick="removeSizeRow(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 8px;font-size:12px;cursor:pointer;color:#c0392b;">✕</button>
+          </div>
+        <div class="size-row" data-cat="women" data-group="women-1" style="display:flex;align-items:center;gap:6px;margin-top:6px;padding:4px;">
+            <input type="radio" name="base-women-women-1" class="size-base-radio"  title="設為基碼" style="flex-shrink:0;">
+            <input class="size-input" data-field="size" value="XL" placeholder="尺碼" style="width:56px;flex-shrink:0;border:1px solid #ddd;border-radius:4px;padding:5px 6px;font-size:12px;">
+            <input class="size-input" data-field="code" value="TCE-WMS0016-2112" placeholder="版型代號" style="flex:1;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+            <button type="button" onclick="removeSizeRow(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 8px;font-size:12px;cursor:pointer;color:#c0392b;">✕</button>
+          </div>
+        <div class="size-row" data-cat="women" data-group="women-1" style="display:flex;align-items:center;gap:6px;margin-top:6px;padding:4px;">
+            <input type="radio" name="base-women-women-1" class="size-base-radio"  title="設為基碼" style="flex-shrink:0;">
+            <input class="size-input" data-field="size" value="XXL" placeholder="尺碼" style="width:56px;flex-shrink:0;border:1px solid #ddd;border-radius:4px;padding:5px 6px;font-size:12px;">
+            <input class="size-input" data-field="code" value="TCE-WPL0017-2112" placeholder="版型代號" style="flex:1;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+            <button type="button" onclick="removeSizeRow(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 8px;font-size:12px;cursor:pointer;color:#c0392b;">✕</button>
+          </div>
+        </div>
+        <button type="button" onclick="addSizeRow('women','women-1')" style="margin-top:6px;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 10px;font-size:12px;cursor:pointer;color:#555;">＋ 新增尺碼</button>
       </div>
-      <div style="display:flex;gap:6px;margin-top:6px;">
-        <input class="mannequin-input" data-cat="women" data-field="path2_label" placeholder="標籤（選填，如 Plus）" value="Plus" style="width:90px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;flex-shrink:0;">
-        <input class="mannequin-input" data-cat="women" data-field="path2" placeholder="路徑（選填）" value="\\192.168.1.220\3ddb\TARGET\AVATAR\FOR_FIT\Alvanon\Clo3D_Original+Basic_20191210T025819Z\Women\Plus" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        <button type="button" class="mannequin-copy" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+      <div class="size-group" data-cat="women" data-group="women-2" style="border:1px solid var(--border);border-radius:6px;padding:10px;margin-top:10px;">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+          <input class="group-name-input" value="Plus 尺碼" placeholder="群組名稱（如 全尺碼、Plus、Husky）" style="flex:1;font-weight:700;font-size:12px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;">
+          <button type="button" onclick="removeSizeGroup(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 8px;font-size:12px;cursor:pointer;color:#c0392b;">✕ 刪除群組</button>
+        </div>
+        <div style="display:flex;gap:6px;margin-bottom:8px;">
+          <input class="group-path-input" value="\\192.168.1.220\3ddb\TARGET\AVATAR\FOR_FIT\Alvanon\Clo3D_Original+Basic_20191210T025819Z\Women\Plus" placeholder="人台路徑" style="flex:1;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+          <button type="button" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:2px;">尺碼（點圓點設基碼）</div>
+        <div id="size-list-women-women-2">
+        <div class="size-row" data-cat="women" data-group="women-2" style="display:flex;align-items:center;gap:6px;margin-top:6px;padding:4px;">
+            <input type="radio" name="base-women-women-2" class="size-base-radio"  title="設為基碼" style="flex-shrink:0;">
+            <input class="size-input" data-field="size" value="XXL" placeholder="尺碼" style="width:56px;flex-shrink:0;border:1px solid #ddd;border-radius:4px;padding:5px 6px;font-size:12px;">
+            <input class="size-input" data-field="code" value="TCE-WPL0017-2112" placeholder="版型代號" style="flex:1;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+            <button type="button" onclick="removeSizeRow(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 8px;font-size:12px;cursor:pointer;color:#c0392b;">✕</button>
+          </div>
+        <div class="size-row" data-cat="women" data-group="women-2" style="display:flex;align-items:center;gap:6px;margin-top:6px;padding:4px;background:var(--bg-accent,#e8f0fe);border-radius:6px;">
+            <input type="radio" name="base-women-women-2" class="size-base-radio" checked title="設為基碼" style="flex-shrink:0;">
+            <input class="size-input" data-field="size" value="1X" placeholder="尺碼" style="width:56px;flex-shrink:0;border:1px solid #ddd;border-radius:4px;padding:5px 6px;font-size:12px;">
+            <input class="size-input" data-field="code" value="TCE-WPL0018-2103" placeholder="版型代號" style="flex:1;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+            <button type="button" onclick="removeSizeRow(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 8px;font-size:12px;cursor:pointer;color:#c0392b;">✕</button>
+          </div>
+        <div class="size-row" data-cat="women" data-group="women-2" style="display:flex;align-items:center;gap:6px;margin-top:6px;padding:4px;">
+            <input type="radio" name="base-women-women-2" class="size-base-radio"  title="設為基碼" style="flex-shrink:0;">
+            <input class="size-input" data-field="size" value="2X" placeholder="尺碼" style="width:56px;flex-shrink:0;border:1px solid #ddd;border-radius:4px;padding:5px 6px;font-size:12px;">
+            <input class="size-input" data-field="code" value="TCE-WPL0022-2112" placeholder="版型代號" style="flex:1;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+            <button type="button" onclick="removeSizeRow(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 8px;font-size:12px;cursor:pointer;color:#c0392b;">✕</button>
+          </div>
+        <div class="size-row" data-cat="women" data-group="women-2" style="display:flex;align-items:center;gap:6px;margin-top:6px;padding:4px;">
+            <input type="radio" name="base-women-women-2" class="size-base-radio"  title="設為基碼" style="flex-shrink:0;">
+            <input class="size-input" data-field="size" value="3X" placeholder="尺碼" style="width:56px;flex-shrink:0;border:1px solid #ddd;border-radius:4px;padding:5px 6px;font-size:12px;">
+            <input class="size-input" data-field="code" value="TCE-WPL0026-2112_STD" placeholder="版型代號" style="flex:1;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+            <button type="button" onclick="removeSizeRow(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 8px;font-size:12px;cursor:pointer;color:#c0392b;">✕</button>
+          </div>
+        <div class="size-row" data-cat="women" data-group="women-2" style="display:flex;align-items:center;gap:6px;margin-top:6px;padding:4px;">
+            <input type="radio" name="base-women-women-2" class="size-base-radio"  title="設為基碼" style="flex-shrink:0;">
+            <input class="size-input" data-field="size" value="4X" placeholder="尺碼" style="width:56px;flex-shrink:0;border:1px solid #ddd;border-radius:4px;padding:5px 6px;font-size:12px;">
+            <input class="size-input" data-field="code" value="TCE-WPL0030-2112" placeholder="版型代號" style="flex:1;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+            <button type="button" onclick="removeSizeRow(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 8px;font-size:12px;cursor:pointer;color:#c0392b;">✕</button>
+          </div>
+        </div>
+        <button type="button" onclick="addSizeRow('women','women-2')" style="margin-top:6px;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 10px;font-size:12px;cursor:pointer;color:#555;">＋ 新增尺碼</button>
       </div>
-      <div style="margin-top:14px;">
-        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
-          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">✅ 基碼</span>
-          <input class="mannequin-input" data-cat="women" data-field="base_size" placeholder="例：M(TCE-WMS0010-2009)" value="M(TCE-WMS0010-2009)" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        </div>
-        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
-          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">全尺碼</span>
-          <input class="mannequin-input" data-cat="women" data-field="full_size" placeholder="各尺碼版型代號" value="XS(TCE-WMS0002-2112) S(TCE-WMS0006-2112) M(TCE-WMS0010-2009) L(TCE-WMS0014-2112) XL(TCE-WMS0016-2112) XXL(TCE-WPL0017-2112)" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        </div>
-        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
-          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">✅ Plus</span>
-          <input class="mannequin-input" data-cat="women" data-field="plus_size" placeholder="選填" value="1X(TCE-WPL0018-2103)" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        </div>
-        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
-          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">全尺碼</span>
-          <input class="mannequin-input" data-cat="women" data-field="plus_full_size" placeholder="選填" value="XXL(TCE-WPL0017-2112) 1X(TCE-WPL0018-2103) 2X(TCE-WPL0022-2112) 3X(TCE-WPL0026-2112_STD) 4X(TCE-WPL0030-2112)" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        </div>
       </div>
+      <button type="button" onclick="addSizeGroup('women')" style="margin-top:10px;background:var(--label-bg);color:#fff;border:none;border-radius:4px;padding:6px 12px;font-size:12px;cursor:pointer;">＋ 新增尺碼群組</button>
     </div>
 
     <div id="mannequin-panel-men" class="mannequin-panel" style="display:none;border:1px solid var(--border);border-radius:8px;padding:18px;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,0.07);max-width:640px;">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
         <span style="font-weight:700;font-size:16px;">Men</span>
       </div>
-      <div class="path-label">人台位置</div>
-      <div style="display:flex;gap:6px;margin-top:6px;">
-        <input class="mannequin-input" data-cat="men" data-field="path1_label" placeholder="標籤（如 Missy）" value="" style="width:90px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;flex-shrink:0;">
-        <input class="mannequin-input" data-cat="men" data-field="path1" placeholder="路徑" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        <button type="button" class="mannequin-copy" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+
+      <div style="font-size:12px;font-weight:700;color:var(--mid);">尺碼群組（含人台位置）</div>
+      <div id="groups-men" data-next-id="2">
+      <div class="size-group" data-cat="men" data-group="men-1" style="border:1px solid var(--border);border-radius:6px;padding:10px;margin-top:10px;">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+          <input class="group-name-input" value="全尺碼" placeholder="群組名稱（如 全尺碼、Plus、Husky）" style="flex:1;font-weight:700;font-size:12px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;">
+          <button type="button" onclick="removeSizeGroup(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 8px;font-size:12px;cursor:pointer;color:#c0392b;">✕ 刪除群組</button>
+        </div>
+        <div style="display:flex;gap:6px;margin-bottom:8px;">
+          <input class="group-path-input" value="" placeholder="人台路徑" style="flex:1;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+          <button type="button" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:2px;">尺碼（點圓點設基碼）</div>
+        <div id="size-list-men-men-1">
+        
+        </div>
+        <button type="button" onclick="addSizeRow('men','men-1')" style="margin-top:6px;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 10px;font-size:12px;cursor:pointer;color:#555;">＋ 新增尺碼</button>
       </div>
-      <div style="display:flex;gap:6px;margin-top:6px;">
-        <input class="mannequin-input" data-cat="men" data-field="path2_label" placeholder="標籤（選填，如 Plus）" value="" style="width:90px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;flex-shrink:0;">
-        <input class="mannequin-input" data-cat="men" data-field="path2" placeholder="路徑（選填）" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        <button type="button" class="mannequin-copy" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
       </div>
-      <div style="margin-top:14px;">
-        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
-          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">✅ 基碼</span>
-          <input class="mannequin-input" data-cat="men" data-field="base_size" placeholder="例：M(TCE-WMS0010-2009)" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        </div>
-        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
-          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">全尺碼</span>
-          <input class="mannequin-input" data-cat="men" data-field="full_size" placeholder="各尺碼版型代號" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        </div>
-        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
-          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">✅ Plus</span>
-          <input class="mannequin-input" data-cat="men" data-field="plus_size" placeholder="選填" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        </div>
-        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
-          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">全尺碼</span>
-          <input class="mannequin-input" data-cat="men" data-field="plus_full_size" placeholder="選填" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        </div>
-      </div>
+      <button type="button" onclick="addSizeGroup('men')" style="margin-top:10px;background:var(--label-bg);color:#fff;border:none;border-radius:4px;padding:6px 12px;font-size:12px;cursor:pointer;">＋ 新增尺碼群組</button>
     </div>
 
     <div id="mannequin-panel-girl" class="mannequin-panel" style="display:none;border:1px solid var(--border);border-radius:8px;padding:18px;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,0.07);max-width:640px;">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
         <span style="font-weight:700;font-size:16px;">Girl</span>
       </div>
-      <div class="path-label">人台位置</div>
-      <div style="display:flex;gap:6px;margin-top:6px;">
-        <input class="mannequin-input" data-cat="girl" data-field="path1_label" placeholder="標籤（如 Missy）" value="" style="width:90px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;flex-shrink:0;">
-        <input class="mannequin-input" data-cat="girl" data-field="path1" placeholder="路徑" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        <button type="button" class="mannequin-copy" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+
+      <div style="font-size:12px;font-weight:700;color:var(--mid);">尺碼群組（含人台位置）</div>
+      <div id="groups-girl" data-next-id="2">
+      <div class="size-group" data-cat="girl" data-group="girl-1" style="border:1px solid var(--border);border-radius:6px;padding:10px;margin-top:10px;">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+          <input class="group-name-input" value="全尺碼" placeholder="群組名稱（如 全尺碼、Plus、Husky）" style="flex:1;font-weight:700;font-size:12px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;">
+          <button type="button" onclick="removeSizeGroup(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 8px;font-size:12px;cursor:pointer;color:#c0392b;">✕ 刪除群組</button>
+        </div>
+        <div style="display:flex;gap:6px;margin-bottom:8px;">
+          <input class="group-path-input" value="" placeholder="人台路徑" style="flex:1;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+          <button type="button" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:2px;">尺碼（點圓點設基碼）</div>
+        <div id="size-list-girl-girl-1">
+        
+        </div>
+        <button type="button" onclick="addSizeRow('girl','girl-1')" style="margin-top:6px;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 10px;font-size:12px;cursor:pointer;color:#555;">＋ 新增尺碼</button>
       </div>
-      <div style="display:flex;gap:6px;margin-top:6px;">
-        <input class="mannequin-input" data-cat="girl" data-field="path2_label" placeholder="標籤（選填，如 Plus）" value="" style="width:90px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;flex-shrink:0;">
-        <input class="mannequin-input" data-cat="girl" data-field="path2" placeholder="路徑（選填）" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        <button type="button" class="mannequin-copy" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
       </div>
-      <div style="margin-top:14px;">
-        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
-          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">✅ 基碼</span>
-          <input class="mannequin-input" data-cat="girl" data-field="base_size" placeholder="例：M(TCE-WMS0010-2009)" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        </div>
-        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
-          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">全尺碼</span>
-          <input class="mannequin-input" data-cat="girl" data-field="full_size" placeholder="各尺碼版型代號" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        </div>
-        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
-          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">✅ Plus</span>
-          <input class="mannequin-input" data-cat="girl" data-field="plus_size" placeholder="選填" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        </div>
-        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
-          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">全尺碼</span>
-          <input class="mannequin-input" data-cat="girl" data-field="plus_full_size" placeholder="選填" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        </div>
-      </div>
+      <button type="button" onclick="addSizeGroup('girl')" style="margin-top:10px;background:var(--label-bg);color:#fff;border:none;border-radius:4px;padding:6px 12px;font-size:12px;cursor:pointer;">＋ 新增尺碼群組</button>
     </div>
 
     <div id="mannequin-panel-boy" class="mannequin-panel" style="display:none;border:1px solid var(--border);border-radius:8px;padding:18px;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,0.07);max-width:640px;">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
         <span style="font-weight:700;font-size:16px;">Boy</span>
       </div>
-      <div class="path-label">人台位置</div>
-      <div style="display:flex;gap:6px;margin-top:6px;">
-        <input class="mannequin-input" data-cat="boy" data-field="path1_label" placeholder="標籤（如 Missy）" value="" style="width:90px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;flex-shrink:0;">
-        <input class="mannequin-input" data-cat="boy" data-field="path1" placeholder="路徑" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        <button type="button" class="mannequin-copy" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+
+      <div style="font-size:12px;font-weight:700;color:var(--mid);">尺碼群組（含人台位置）</div>
+      <div id="groups-boy" data-next-id="2">
+      <div class="size-group" data-cat="boy" data-group="boy-1" style="border:1px solid var(--border);border-radius:6px;padding:10px;margin-top:10px;">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+          <input class="group-name-input" value="全尺碼" placeholder="群組名稱（如 全尺碼、Plus、Husky）" style="flex:1;font-weight:700;font-size:12px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;">
+          <button type="button" onclick="removeSizeGroup(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 8px;font-size:12px;cursor:pointer;color:#c0392b;">✕ 刪除群組</button>
+        </div>
+        <div style="display:flex;gap:6px;margin-bottom:8px;">
+          <input class="group-path-input" value="" placeholder="人台路徑" style="flex:1;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+          <button type="button" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:2px;">尺碼（點圓點設基碼）</div>
+        <div id="size-list-boy-boy-1">
+        
+        </div>
+        <button type="button" onclick="addSizeRow('boy','boy-1')" style="margin-top:6px;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 10px;font-size:12px;cursor:pointer;color:#555;">＋ 新增尺碼</button>
       </div>
-      <div style="display:flex;gap:6px;margin-top:6px;">
-        <input class="mannequin-input" data-cat="boy" data-field="path2_label" placeholder="標籤（選填，如 Plus）" value="" style="width:90px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;flex-shrink:0;">
-        <input class="mannequin-input" data-cat="boy" data-field="path2" placeholder="路徑（選填）" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        <button type="button" class="mannequin-copy" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
       </div>
-      <div style="margin-top:14px;">
-        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
-          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">✅ 基碼</span>
-          <input class="mannequin-input" data-cat="boy" data-field="base_size" placeholder="例：M(TCE-WMS0010-2009)" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        </div>
-        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
-          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">全尺碼</span>
-          <input class="mannequin-input" data-cat="boy" data-field="full_size" placeholder="各尺碼版型代號" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        </div>
-        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
-          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">✅ Plus</span>
-          <input class="mannequin-input" data-cat="boy" data-field="plus_size" placeholder="選填" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        </div>
-        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
-          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">全尺碼</span>
-          <input class="mannequin-input" data-cat="boy" data-field="plus_full_size" placeholder="選填" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        </div>
-      </div>
+      <button type="button" onclick="addSizeGroup('boy')" style="margin-top:10px;background:var(--label-bg);color:#fff;border:none;border-radius:4px;padding:6px 12px;font-size:12px;cursor:pointer;">＋ 新增尺碼群組</button>
     </div>
 
     <div id="mannequin-panel-toddler" class="mannequin-panel" style="display:none;border:1px solid var(--border);border-radius:8px;padding:18px;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,0.07);max-width:640px;">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
         <span style="font-weight:700;font-size:16px;">Toddler (NIT)</span>
       </div>
-      <div class="path-label">人台位置</div>
-      <div style="display:flex;gap:6px;margin-top:6px;">
-        <input class="mannequin-input" data-cat="toddler" data-field="path1_label" placeholder="標籤（如 Missy）" value="" style="width:90px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;flex-shrink:0;">
-        <input class="mannequin-input" data-cat="toddler" data-field="path1" placeholder="路徑" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        <button type="button" class="mannequin-copy" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+
+      <div style="font-size:12px;font-weight:700;color:var(--mid);">尺碼群組（含人台位置）</div>
+      <div id="groups-toddler" data-next-id="2">
+      <div class="size-group" data-cat="toddler" data-group="toddler-1" style="border:1px solid var(--border);border-radius:6px;padding:10px;margin-top:10px;">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+          <input class="group-name-input" value="全尺碼" placeholder="群組名稱（如 全尺碼、Plus、Husky）" style="flex:1;font-weight:700;font-size:12px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;">
+          <button type="button" onclick="removeSizeGroup(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 8px;font-size:12px;cursor:pointer;color:#c0392b;">✕ 刪除群組</button>
+        </div>
+        <div style="display:flex;gap:6px;margin-bottom:8px;">
+          <input class="group-path-input" value="" placeholder="人台路徑" style="flex:1;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+          <button type="button" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:2px;">尺碼（點圓點設基碼）</div>
+        <div id="size-list-toddler-toddler-1">
+        
+        </div>
+        <button type="button" onclick="addSizeRow('toddler','toddler-1')" style="margin-top:6px;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 10px;font-size:12px;cursor:pointer;color:#555;">＋ 新增尺碼</button>
       </div>
-      <div style="display:flex;gap:6px;margin-top:6px;">
-        <input class="mannequin-input" data-cat="toddler" data-field="path2_label" placeholder="標籤（選填，如 Plus）" value="" style="width:90px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;flex-shrink:0;">
-        <input class="mannequin-input" data-cat="toddler" data-field="path2" placeholder="路徑（選填）" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        <button type="button" class="mannequin-copy" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
       </div>
-      <div style="margin-top:14px;">
-        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
-          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">✅ 基碼</span>
-          <input class="mannequin-input" data-cat="toddler" data-field="base_size" placeholder="例：M(TCE-WMS0010-2009)" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        </div>
-        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
-          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">全尺碼</span>
-          <input class="mannequin-input" data-cat="toddler" data-field="full_size" placeholder="各尺碼版型代號" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        </div>
-        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
-          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">✅ Plus</span>
-          <input class="mannequin-input" data-cat="toddler" data-field="plus_size" placeholder="選填" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        </div>
-        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
-          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">全尺碼</span>
-          <input class="mannequin-input" data-cat="toddler" data-field="plus_full_size" placeholder="選填" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        </div>
-      </div>
+      <button type="button" onclick="addSizeGroup('toddler')" style="margin-top:10px;background:var(--label-bg);color:#fff;border:none;border-radius:4px;padding:6px 12px;font-size:12px;cursor:pointer;">＋ 新增尺碼群組</button>
     </div>
 
     <div id="mannequin-panel-newborn" class="mannequin-panel" style="display:none;border:1px solid var(--border);border-radius:8px;padding:18px;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,0.07);max-width:640px;">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
         <span style="font-weight:700;font-size:16px;">Newborn</span>
       </div>
-      <div class="path-label">人台位置</div>
-      <div style="display:flex;gap:6px;margin-top:6px;">
-        <input class="mannequin-input" data-cat="newborn" data-field="path1_label" placeholder="標籤（如 Missy）" value="" style="width:90px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;flex-shrink:0;">
-        <input class="mannequin-input" data-cat="newborn" data-field="path1" placeholder="路徑" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        <button type="button" class="mannequin-copy" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+
+      <div style="font-size:12px;font-weight:700;color:var(--mid);">尺碼群組（含人台位置）</div>
+      <div id="groups-newborn" data-next-id="2">
+      <div class="size-group" data-cat="newborn" data-group="newborn-1" style="border:1px solid var(--border);border-radius:6px;padding:10px;margin-top:10px;">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+          <input class="group-name-input" value="全尺碼" placeholder="群組名稱（如 全尺碼、Plus、Husky）" style="flex:1;font-weight:700;font-size:12px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;">
+          <button type="button" onclick="removeSizeGroup(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 8px;font-size:12px;cursor:pointer;color:#c0392b;">✕ 刪除群組</button>
+        </div>
+        <div style="display:flex;gap:6px;margin-bottom:8px;">
+          <input class="group-path-input" value="" placeholder="人台路徑" style="flex:1;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+          <button type="button" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:2px;">尺碼（點圓點設基碼）</div>
+        <div id="size-list-newborn-newborn-1">
+        
+        </div>
+        <button type="button" onclick="addSizeRow('newborn','newborn-1')" style="margin-top:6px;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 10px;font-size:12px;cursor:pointer;color:#555;">＋ 新增尺碼</button>
       </div>
-      <div style="display:flex;gap:6px;margin-top:6px;">
-        <input class="mannequin-input" data-cat="newborn" data-field="path2_label" placeholder="標籤（選填，如 Plus）" value="" style="width:90px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;flex-shrink:0;">
-        <input class="mannequin-input" data-cat="newborn" data-field="path2" placeholder="路徑（選填）" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        <button type="button" class="mannequin-copy" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
       </div>
-      <div style="margin-top:14px;">
-        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
-          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">✅ 基碼</span>
-          <input class="mannequin-input" data-cat="newborn" data-field="base_size" placeholder="例：M(TCE-WMS0010-2009)" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        </div>
-        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
-          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">全尺碼</span>
-          <input class="mannequin-input" data-cat="newborn" data-field="full_size" placeholder="各尺碼版型代號" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        </div>
-        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
-          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">✅ Plus</span>
-          <input class="mannequin-input" data-cat="newborn" data-field="plus_size" placeholder="選填" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        </div>
-        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
-          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">全尺碼</span>
-          <input class="mannequin-input" data-cat="newborn" data-field="plus_full_size" placeholder="選填" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
-        </div>
-      </div>
+      <button type="button" onclick="addSizeGroup('newborn')" style="margin-top:10px;background:var(--label-bg);color:#fff;border:none;border-radius:4px;padding:6px 12px;font-size:12px;cursor:pointer;">＋ 新增尺碼群組</button>
     </div>
   </div>
 
@@ -1993,7 +2018,6 @@
 <script>
   // ── 人台 ──
   const MANNEQUIN_CATEGORIES = ['women','men','girl','boy','toddler','newborn'];
-  const MANNEQUIN_FIELDS = ['path1_label','path1','path2_label','path2','base_size','full_size','plus_size','plus_full_size'];
 
   function switchMannequinTab(tab) {
     document.querySelectorAll('.mannequin-tab').forEach(b => {
@@ -2016,16 +2040,111 @@
     });
   }
 
+  function makeSizeRow(cat, group, size, code, isBase) {
+    const row = document.createElement('div');
+    row.className = 'size-row';
+    row.dataset.cat = cat;
+    row.dataset.group = group;
+    row.style.cssText = 'display:flex;align-items:center;gap:6px;margin-top:6px;padding:4px;' + (isBase ? 'background:var(--bg-accent,#e8f0fe);border-radius:6px;' : '');
+    row.innerHTML = `
+      <input type="radio" name="base-${cat}-${group}" class="size-base-radio" ${isBase ? 'checked' : ''} title="設為基碼" style="flex-shrink:0;">
+      <input class="size-input" data-field="size" value="${(size||'').replace(/"/g,'&quot;')}" placeholder="尺碼" style="width:56px;flex-shrink:0;border:1px solid #ddd;border-radius:4px;padding:5px 6px;font-size:12px;">
+      <input class="size-input" data-field="code" value="${(code||'').replace(/"/g,'&quot;')}" placeholder="版型代號" style="flex:1;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+      <button type="button" onclick="removeSizeRow(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 8px;font-size:12px;cursor:pointer;color:#c0392b;">✕</button>
+    `;
+    row.querySelector('.size-base-radio').addEventListener('change', function() {
+      document.querySelectorAll(`.size-row[data-cat="${cat}"][data-group="${group}"]`).forEach(r => {
+        r.style.background = ''; r.style.borderRadius = '';
+      });
+      if (this.checked) { row.style.background = 'var(--bg-accent,#e8f0fe)'; row.style.borderRadius = '6px'; }
+    });
+    return row;
+  }
+
+  function addSizeRow(cat, group, size, code, isBase) {
+    const list = document.getElementById(`size-list-${cat}-${group}`);
+    if (!list) return;
+    list.appendChild(makeSizeRow(cat, group, size || '', code || '', !!isBase));
+  }
+
+  function removeSizeRow(btn) {
+    const row = btn.closest('.size-row');
+    if (row) row.remove();
+  }
+
+  function collectSizeGroup(cat, group) {
+    const rows = [];
+    document.querySelectorAll(`.size-row[data-cat="${cat}"][data-group="${group}"]`).forEach(row => {
+      const size = row.querySelector('[data-field="size"]').value.trim();
+      const code = row.querySelector('[data-field="code"]').value.trim();
+      const base = row.querySelector('.size-base-radio').checked;
+      if (size || code) rows.push({ size, code, base });
+    });
+    return rows;
+  }
+
+  function renderSizeGroup(cat, group, rows) {
+    const list = document.getElementById(`size-list-${cat}-${group}`);
+    if (!list) return;
+    list.innerHTML = '';
+    (rows || []).forEach(r => list.appendChild(makeSizeRow(cat, group, r.size, r.code, !!r.base)));
+  }
+
+  function makeSizeGroupEl(cat, gid, name, path, rows) {
+    const wrap = document.createElement('div');
+    wrap.className = 'size-group';
+    wrap.dataset.cat = cat;
+    wrap.dataset.group = gid;
+    wrap.style.cssText = 'border:1px solid var(--border);border-radius:6px;padding:10px;margin-top:10px;';
+    wrap.innerHTML = `
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+        <input class="group-name-input" value="${(name||'').replace(/"/g,'&quot;')}" placeholder="群組名稱（如 全尺碼、Plus、Husky）" style="flex:1;font-weight:700;font-size:12px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;">
+        <button type="button" onclick="removeSizeGroup(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 8px;font-size:12px;cursor:pointer;color:#c0392b;">✕ 刪除群組</button>
+      </div>
+      <div style="display:flex;gap:6px;margin-bottom:8px;">
+        <span style="font-size:11px;color:var(--muted);width:44px;flex-shrink:0;display:flex;align-items:center;">路徑</span>
+        <input class="group-path-input" value="${(path||'').replace(/"/g,'&quot;')}" placeholder="人台位置路徑" style="flex:1;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        <button type="button" class="mannequin-copy" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:2px;">尺碼（點圓點設基碼）</div>
+      <div id="size-list-${cat}-${gid}"></div>
+      <button type="button" onclick="addSizeRow('${cat}','${gid}')" style="margin-top:6px;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:4px 10px;font-size:12px;cursor:pointer;color:#555;">＋ 新增尺碼</button>
+    `;
+    (rows || []).forEach(r => {
+      wrap.querySelector(`#size-list-${cat}-${gid}`).appendChild(makeSizeRow(cat, gid, r.size, r.code, !!r.base));
+    });
+    return wrap;
+  }
+
+  function addSizeGroup(cat, name, path, rows) {
+    const container = document.getElementById(`groups-${cat}`);
+    if (!container) return;
+    let nextId = parseInt(container.dataset.nextId || '1', 10);
+    const gid = `${cat}-${nextId}`;
+    container.dataset.nextId = nextId + 1;
+    container.appendChild(makeSizeGroupEl(cat, gid, name || '新群組', path || '', rows || []));
+  }
+
+  function removeSizeGroup(btn) {
+    const group = btn.closest('.size-group');
+    if (group && confirm('確定刪除這個尺碼群組？')) group.remove();
+  }
+
   async function saveMannequinInfo() {
     const msg = document.getElementById('mannequin-save-msg');
     msg.style.display = 'inline'; msg.textContent = '儲存中...'; msg.style.color = '#888';
 
     const payload = MANNEQUIN_CATEGORIES.map(cat => {
       const row = { category: cat };
-      MANNEQUIN_FIELDS.forEach(f => {
-        const el = document.querySelector(`.mannequin-input[data-cat="${cat}"][data-field="${f}"]`);
-        row[f] = el ? el.value : '';
+      const groups = [];
+      document.querySelectorAll(`.size-group[data-cat="${cat}"]`).forEach(g => {
+        const name = g.querySelector('.group-name-input').value.trim();
+        const path = g.querySelector('.group-path-input').value.trim();
+        const gid = g.dataset.group;
+        groups.push({ name, path, rows: collectSizeGroup(cat, gid) });
       });
+      row.full_size = JSON.stringify(groups);
+      row.plus_full_size = '';
       return row;
     });
 
@@ -2058,10 +2177,15 @@
       if (!res.ok) return;
       const data = await res.json();
       data.forEach(row => {
-        MANNEQUIN_FIELDS.forEach(f => {
-          const el = document.querySelector(`.mannequin-input[data-cat="${row.category}"][data-field="${f}"]`);
-          if (el && row[f] != null) el.value = row[f];
-        });
+        if (!row.full_size) return;
+        let groups;
+        try { groups = JSON.parse(row.full_size); } catch(e) { return; }
+        if (!Array.isArray(groups)) return;
+        const container = document.getElementById(`groups-${row.category}`);
+        if (!container) return;
+        container.innerHTML = '';
+        container.dataset.nextId = '1';
+        groups.forEach(g => addSizeGroup(row.category, g.name, g.path, g.rows));
       });
     } catch(e) {}
   }
