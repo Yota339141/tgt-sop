@@ -659,6 +659,10 @@
       <span class="nav-num" style="background:#444">⊞</span>
       <span>總覽</span>
     </a>
+    <a class="nav-item" onclick="showSection('avatar')">
+      <span class="nav-num" style="background:#0d7a5f;font-size:9px;">👤</span>
+      <span>人台</span>
+    </a>
     <a class="nav-item" onclick="showSection('s1')">
       <span class="nav-num">01</span>
       <span>Proto Prefit</span>
@@ -793,7 +797,6 @@
       </div>
     </div>
 
-    <!-- SPARK 帳號密碼 -->
     <div style="margin-top:28px;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
         <h3 style="font-size:14px;font-weight:700;color:var(--mid);">SPARK 帳號密碼</h3>
@@ -880,6 +883,246 @@
           <tr><td class="dept">TGT 本家 FAAM</td><td class="person">Sammi Huang<br>Lynn</td><td class="ext">#760-328<br>#760-336</td></tr>
         </tbody>
       </table>
+    </div>
+  </div>
+
+  <!-- 人台設定 -->
+  <div class="section" id="section-avatar">
+    <div class="breadcrumb">TGT 3D 作業 SOP › <span>人台</span></div>
+    <div class="section-title-wrap">
+      <h2>👤 人台</h2>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+      <div style="font-size:12px;color:var(--muted);">點選類別查看/編輯人台路徑與尺碼資訊，欄位可直接修改後按儲存</div>
+      <div>
+        <button onclick="saveMannequinInfo()" style="background:var(--label-bg);color:#fff;border:none;border-radius:6px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;">💾 儲存</button>
+        <span id="mannequin-save-msg" style="display:none;font-size:12px;margin-left:8px;"></span>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
+      <button class="mannequin-tab" data-tab="women" onclick="switchMannequinTab('women')" style="background:var(--label-bg);color:#fff;border:none;border-radius:6px;padding:6px 16px;font-size:13px;font-weight:600;cursor:pointer;">Women</button>
+      <button class="mannequin-tab" data-tab="men" onclick="switchMannequinTab('men')" style="background:#eee;color:var(--mid);border:none;border-radius:6px;padding:6px 16px;font-size:13px;font-weight:600;cursor:pointer;">Men</button>
+      <button class="mannequin-tab" data-tab="girl" onclick="switchMannequinTab('girl')" style="background:#eee;color:var(--mid);border:none;border-radius:6px;padding:6px 16px;font-size:13px;font-weight:600;cursor:pointer;">Girl</button>
+      <button class="mannequin-tab" data-tab="boy" onclick="switchMannequinTab('boy')" style="background:#eee;color:var(--mid);border:none;border-radius:6px;padding:6px 16px;font-size:13px;font-weight:600;cursor:pointer;">Boy</button>
+      <button class="mannequin-tab" data-tab="toddler" onclick="switchMannequinTab('toddler')" style="background:#eee;color:var(--mid);border:none;border-radius:6px;padding:6px 16px;font-size:13px;font-weight:600;cursor:pointer;">Toddler (NIT)</button>
+      <button class="mannequin-tab" data-tab="newborn" onclick="switchMannequinTab('newborn')" style="background:#eee;color:var(--mid);border:none;border-radius:6px;padding:6px 16px;font-size:13px;font-weight:600;cursor:pointer;">Newborn</button>
+    </div>
+
+    <div id="mannequin-panel-women" class="mannequin-panel" style="border:1px solid var(--border);border-radius:8px;padding:18px;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,0.07);max-width:640px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+        <span style="font-weight:700;font-size:16px;">Women</span>
+        <span style="background:#e8f0fe;color:#1a56db;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600;">官方規範</span>
+      </div>
+      <div class="path-label">人台位置</div>
+      <div style="display:flex;gap:6px;margin-top:6px;">
+        <input class="mannequin-input" data-cat="women" data-field="path1_label" placeholder="標籤（如 Missy）" value="Missy" style="width:90px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;flex-shrink:0;">
+        <input class="mannequin-input" data-cat="women" data-field="path1" placeholder="路徑" value="\\192.168.1.220\3ddb\TARGET\AVATAR\FOR_FIT\Alvanon\Clo3D_Original+Basic_20191210T025819Z\Women\Missy" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        <button type="button" class="mannequin-copy" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+      </div>
+      <div style="display:flex;gap:6px;margin-top:6px;">
+        <input class="mannequin-input" data-cat="women" data-field="path2_label" placeholder="標籤（選填，如 Plus）" value="Plus" style="width:90px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;flex-shrink:0;">
+        <input class="mannequin-input" data-cat="women" data-field="path2" placeholder="路徑（選填）" value="\\192.168.1.220\3ddb\TARGET\AVATAR\FOR_FIT\Alvanon\Clo3D_Original+Basic_20191210T025819Z\Women\Plus" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        <button type="button" class="mannequin-copy" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+      </div>
+      <div style="margin-top:14px;">
+        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
+          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">✅ 基碼</span>
+          <input class="mannequin-input" data-cat="women" data-field="base_size" placeholder="例：M(TCE-WMS0010-2009)" value="M(TCE-WMS0010-2009)" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
+          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">全尺碼</span>
+          <input class="mannequin-input" data-cat="women" data-field="full_size" placeholder="各尺碼版型代號" value="XS(TCE-WMS0002-2112) S(TCE-WMS0006-2112) M(TCE-WMS0010-2009) L(TCE-WMS0014-2112) XL(TCE-WMS0016-2112) XXL(TCE-WPL0017-2112)" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
+          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">✅ Plus</span>
+          <input class="mannequin-input" data-cat="women" data-field="plus_size" placeholder="選填" value="1X(TCE-WPL0018-2103)" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
+          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">全尺碼</span>
+          <input class="mannequin-input" data-cat="women" data-field="plus_full_size" placeholder="選填" value="XXL(TCE-WPL0017-2112) 1X(TCE-WPL0018-2103) 2X(TCE-WPL0022-2112) 3X(TCE-WPL0026-2112_STD) 4X(TCE-WPL0030-2112)" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        </div>
+      </div>
+    </div>
+
+    <div id="mannequin-panel-men" class="mannequin-panel" style="display:none;border:1px solid var(--border);border-radius:8px;padding:18px;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,0.07);max-width:640px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+        <span style="font-weight:700;font-size:16px;">Men</span>
+        <span style="background:#e8f0fe;color:#1a56db;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600;">官方規範</span>
+      </div>
+      <div class="path-label">人台位置</div>
+      <div style="display:flex;gap:6px;margin-top:6px;">
+        <input class="mannequin-input" data-cat="men" data-field="path1_label" placeholder="標籤（如 Missy）" value="" style="width:90px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;flex-shrink:0;">
+        <input class="mannequin-input" data-cat="men" data-field="path1" placeholder="路徑" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        <button type="button" class="mannequin-copy" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+      </div>
+      <div style="display:flex;gap:6px;margin-top:6px;">
+        <input class="mannequin-input" data-cat="men" data-field="path2_label" placeholder="標籤（選填，如 Plus）" value="" style="width:90px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;flex-shrink:0;">
+        <input class="mannequin-input" data-cat="men" data-field="path2" placeholder="路徑（選填）" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        <button type="button" class="mannequin-copy" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+      </div>
+      <div style="margin-top:14px;">
+        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
+          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">✅ 基碼</span>
+          <input class="mannequin-input" data-cat="men" data-field="base_size" placeholder="例：M(TCE-WMS0010-2009)" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
+          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">全尺碼</span>
+          <input class="mannequin-input" data-cat="men" data-field="full_size" placeholder="各尺碼版型代號" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
+          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">✅ Plus</span>
+          <input class="mannequin-input" data-cat="men" data-field="plus_size" placeholder="選填" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
+          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">全尺碼</span>
+          <input class="mannequin-input" data-cat="men" data-field="plus_full_size" placeholder="選填" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        </div>
+      </div>
+    </div>
+
+    <div id="mannequin-panel-girl" class="mannequin-panel" style="display:none;border:1px solid var(--border);border-radius:8px;padding:18px;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,0.07);max-width:640px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+        <span style="font-weight:700;font-size:16px;">Girl</span>
+        <span style="background:#e8f0fe;color:#1a56db;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600;">官方規範</span>
+      </div>
+      <div class="path-label">人台位置</div>
+      <div style="display:flex;gap:6px;margin-top:6px;">
+        <input class="mannequin-input" data-cat="girl" data-field="path1_label" placeholder="標籤（如 Missy）" value="" style="width:90px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;flex-shrink:0;">
+        <input class="mannequin-input" data-cat="girl" data-field="path1" placeholder="路徑" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        <button type="button" class="mannequin-copy" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+      </div>
+      <div style="display:flex;gap:6px;margin-top:6px;">
+        <input class="mannequin-input" data-cat="girl" data-field="path2_label" placeholder="標籤（選填，如 Plus）" value="" style="width:90px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;flex-shrink:0;">
+        <input class="mannequin-input" data-cat="girl" data-field="path2" placeholder="路徑（選填）" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        <button type="button" class="mannequin-copy" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+      </div>
+      <div style="margin-top:14px;">
+        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
+          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">✅ 基碼</span>
+          <input class="mannequin-input" data-cat="girl" data-field="base_size" placeholder="例：M(TCE-WMS0010-2009)" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
+          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">全尺碼</span>
+          <input class="mannequin-input" data-cat="girl" data-field="full_size" placeholder="各尺碼版型代號" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
+          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">✅ Plus</span>
+          <input class="mannequin-input" data-cat="girl" data-field="plus_size" placeholder="選填" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
+          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">全尺碼</span>
+          <input class="mannequin-input" data-cat="girl" data-field="plus_full_size" placeholder="選填" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        </div>
+      </div>
+    </div>
+
+    <div id="mannequin-panel-boy" class="mannequin-panel" style="display:none;border:1px solid var(--border);border-radius:8px;padding:18px;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,0.07);max-width:640px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+        <span style="font-weight:700;font-size:16px;">Boy</span>
+        <span style="background:#e8f0fe;color:#1a56db;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600;">官方規範</span>
+      </div>
+      <div class="path-label">人台位置</div>
+      <div style="display:flex;gap:6px;margin-top:6px;">
+        <input class="mannequin-input" data-cat="boy" data-field="path1_label" placeholder="標籤（如 Missy）" value="" style="width:90px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;flex-shrink:0;">
+        <input class="mannequin-input" data-cat="boy" data-field="path1" placeholder="路徑" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        <button type="button" class="mannequin-copy" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+      </div>
+      <div style="display:flex;gap:6px;margin-top:6px;">
+        <input class="mannequin-input" data-cat="boy" data-field="path2_label" placeholder="標籤（選填，如 Plus）" value="" style="width:90px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;flex-shrink:0;">
+        <input class="mannequin-input" data-cat="boy" data-field="path2" placeholder="路徑（選填）" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        <button type="button" class="mannequin-copy" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+      </div>
+      <div style="margin-top:14px;">
+        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
+          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">✅ 基碼</span>
+          <input class="mannequin-input" data-cat="boy" data-field="base_size" placeholder="例：M(TCE-WMS0010-2009)" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
+          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">全尺碼</span>
+          <input class="mannequin-input" data-cat="boy" data-field="full_size" placeholder="各尺碼版型代號" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
+          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">✅ Plus</span>
+          <input class="mannequin-input" data-cat="boy" data-field="plus_size" placeholder="選填" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
+          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">全尺碼</span>
+          <input class="mannequin-input" data-cat="boy" data-field="plus_full_size" placeholder="選填" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        </div>
+      </div>
+    </div>
+
+    <div id="mannequin-panel-toddler" class="mannequin-panel" style="display:none;border:1px solid var(--border);border-radius:8px;padding:18px;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,0.07);max-width:640px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+        <span style="font-weight:700;font-size:16px;">Toddler (NIT)</span>
+        <span style="background:#e8f0fe;color:#1a56db;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600;">官方規範</span>
+      </div>
+      <div class="path-label">人台位置</div>
+      <div style="display:flex;gap:6px;margin-top:6px;">
+        <input class="mannequin-input" data-cat="toddler" data-field="path1_label" placeholder="標籤（如 Missy）" value="" style="width:90px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;flex-shrink:0;">
+        <input class="mannequin-input" data-cat="toddler" data-field="path1" placeholder="路徑" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        <button type="button" class="mannequin-copy" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+      </div>
+      <div style="display:flex;gap:6px;margin-top:6px;">
+        <input class="mannequin-input" data-cat="toddler" data-field="path2_label" placeholder="標籤（選填，如 Plus）" value="" style="width:90px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;flex-shrink:0;">
+        <input class="mannequin-input" data-cat="toddler" data-field="path2" placeholder="路徑（選填）" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        <button type="button" class="mannequin-copy" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+      </div>
+      <div style="margin-top:14px;">
+        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
+          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">✅ 基碼</span>
+          <input class="mannequin-input" data-cat="toddler" data-field="base_size" placeholder="例：M(TCE-WMS0010-2009)" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
+          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">全尺碼</span>
+          <input class="mannequin-input" data-cat="toddler" data-field="full_size" placeholder="各尺碼版型代號" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
+          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">✅ Plus</span>
+          <input class="mannequin-input" data-cat="toddler" data-field="plus_size" placeholder="選填" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
+          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">全尺碼</span>
+          <input class="mannequin-input" data-cat="toddler" data-field="plus_full_size" placeholder="選填" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        </div>
+      </div>
+    </div>
+
+    <div id="mannequin-panel-newborn" class="mannequin-panel" style="display:none;border:1px solid var(--border);border-radius:8px;padding:18px;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,0.07);max-width:640px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+        <span style="font-weight:700;font-size:16px;">Newborn</span>
+        <span style="background:#e8f0fe;color:#1a56db;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600;">官方規範</span>
+      </div>
+      <div class="path-label">人台位置</div>
+      <div style="display:flex;gap:6px;margin-top:6px;">
+        <input class="mannequin-input" data-cat="newborn" data-field="path1_label" placeholder="標籤（如 Missy）" value="" style="width:90px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;flex-shrink:0;">
+        <input class="mannequin-input" data-cat="newborn" data-field="path1" placeholder="路徑" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        <button type="button" class="mannequin-copy" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+      </div>
+      <div style="display:flex;gap:6px;margin-top:6px;">
+        <input class="mannequin-input" data-cat="newborn" data-field="path2_label" placeholder="標籤（選填，如 Plus）" value="" style="width:90px;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;flex-shrink:0;">
+        <input class="mannequin-input" data-cat="newborn" data-field="path2" placeholder="路徑（選填）" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        <button type="button" class="mannequin-copy" onclick="copyMannequinPath(this)" style="flex-shrink:0;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;cursor:pointer;">📋</button>
+      </div>
+      <div style="margin-top:14px;">
+        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
+          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">✅ 基碼</span>
+          <input class="mannequin-input" data-cat="newborn" data-field="base_size" placeholder="例：M(TCE-WMS0010-2009)" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
+          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">全尺碼</span>
+          <input class="mannequin-input" data-cat="newborn" data-field="full_size" placeholder="各尺碼版型代號" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
+          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">✅ Plus</span>
+          <input class="mannequin-input" data-cat="newborn" data-field="plus_size" placeholder="選填" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;margin-top:6px;">
+          <span style="font-size:12px;color:var(--mid);width:70px;flex-shrink:0;">全尺碼</span>
+          <input class="mannequin-input" data-cat="newborn" data-field="plus_full_size" placeholder="選填" value="" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;">
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1754,6 +1997,81 @@
 </main>
 
 <script>
+  // ── 人台 ──
+  const MANNEQUIN_CATEGORIES = ['women','men','girl','boy','toddler','newborn'];
+  const MANNEQUIN_FIELDS = ['path1_label','path1','path2_label','path2','base_size','full_size','plus_size','plus_full_size'];
+
+  function switchMannequinTab(tab) {
+    document.querySelectorAll('.mannequin-tab').forEach(b => {
+      const active = b.dataset.tab === tab;
+      b.style.background = active ? 'var(--label-bg)' : '#eee';
+      b.style.color = active ? '#fff' : 'var(--mid)';
+    });
+    document.querySelectorAll('.mannequin-panel').forEach(p => {
+      p.style.display = p.id === 'mannequin-panel-' + tab ? 'block' : 'none';
+    });
+  }
+
+  function copyMannequinPath(btn) {
+    const input = btn.previousElementSibling;
+    if (!input || !input.value) return;
+    navigator.clipboard.writeText(input.value).then(() => {
+      const old = btn.textContent;
+      btn.textContent = '✓';
+      setTimeout(() => { btn.textContent = old; }, 1200);
+    });
+  }
+
+  async function saveMannequinInfo() {
+    const msg = document.getElementById('mannequin-save-msg');
+    msg.style.display = 'inline'; msg.textContent = '儲存中...'; msg.style.color = '#888';
+
+    const payload = MANNEQUIN_CATEGORIES.map(cat => {
+      const row = { category: cat };
+      MANNEQUIN_FIELDS.forEach(f => {
+        const el = document.querySelector(`.mannequin-input[data-cat="${cat}"][data-field="${f}"]`);
+        row[f] = el ? el.value : '';
+      });
+      return row;
+    });
+
+    try {
+      await fetch(`${SB_URL}/rest/v1/mannequin_info?category=neq.__none__`, {
+        method: 'DELETE', headers: SB_HEADERS
+      });
+      const res = await fetch(`${SB_URL}/rest/v1/mannequin_info`, {
+        method: 'POST',
+        headers: { ...SB_HEADERS, 'Prefer': 'return=minimal' },
+        body: JSON.stringify(payload)
+      });
+      if (res.ok || res.status === 201) {
+        msg.textContent = '✓ 已儲存'; msg.style.color = 'green';
+      } else {
+        const err = await res.text();
+        console.error(err);
+        msg.textContent = '❌ 儲存失敗'; msg.style.color = 'red';
+      }
+    } catch(e) {
+      console.error(e);
+      msg.textContent = '❌ 網路錯誤'; msg.style.color = 'red';
+    }
+    setTimeout(() => { msg.style.display = 'none'; }, 2500);
+  }
+
+  async function loadMannequinInfo() {
+    try {
+      const res = await fetch(`${SB_URL}/rest/v1/mannequin_info?select=*`, { headers: SB_HEADERS });
+      if (!res.ok) return;
+      const data = await res.json();
+      data.forEach(row => {
+        MANNEQUIN_FIELDS.forEach(f => {
+          const el = document.querySelector(`.mannequin-input[data-cat="${row.category}"][data-field="${f}"]`);
+          if (el && row[f] != null) el.value = row[f];
+        });
+      });
+    } catch(e) {}
+  }
+
   // ── LIGHTBOX ──
   function openLightbox(img) {
     document.getElementById('lightbox-img').src = img.src;
@@ -1789,10 +2107,11 @@
     const target = document.getElementById('section-' + id);
     if (target) { target.classList.add('active'); target.style.display = 'block'; }
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-    const map = { index:0, s1:1, s2:2, s3:3, s4:4, s5:5, s6:6, std:7, rec:8 };
+    const map = { index:0, avatar:1, s1:2, s2:3, s3:4, s4:5, s5:6, s6:7, std:8, rec:9 };
     const navItems = document.querySelectorAll('.nav-item');
     if (map[id] !== undefined && navItems[map[id]]) navItems[map[id]].classList.add('active');
     if (id === 'rec') loadRecords();
+    if (id === 'avatar') loadMannequinInfo();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
